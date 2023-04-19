@@ -8,6 +8,7 @@ axios.defaults.baseURL = 'http://localhost:3001/api'
 export default createStore({
   state: {
     en: false,
+    repo: false,
     hello: '',
     doc_name: 'javadoc',
     current_section_id: '0',
@@ -31,6 +32,13 @@ export default createStore({
         state.en = true
       } else {
         state.en = false
+      }
+    },
+    set_searchtype: (state, payload) => {
+      if (payload === 'repo') {
+        state.repo = true
+      } else {
+        state.repo = false
       }
     },
     set_hello: (state, payload) => {

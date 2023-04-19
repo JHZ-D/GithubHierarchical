@@ -2,9 +2,21 @@
   <div class="home">
     <n-tooltip trigger="hover">
       <template #trigger>
-        <n-button ghost circle size="small" @click="showModal = true" id="home-help-btn"><n-icon size="15"><help-icon/></n-icon></n-button>
+        <n-button ghost circle size="large" @click="showModal = true" id="home-help-btn"><n-icon size="30"><HelpIcon/></n-icon></n-button>
       </template>
-      {{en? "How can this service help me learn java APIs?": "这东西如何帮助我学习java API？"}}
+      帮助
+    </n-tooltip>
+    <n-tooltip trigger="hover">
+      <template #trigger>
+        <n-button ghost circle size="large" @click="showModal = true" id="home-contact-btn"><n-icon size="30"><MailIcon/></n-icon></n-button>
+      </template>
+      联系我们
+    </n-tooltip>
+    <n-tooltip trigger="hover">
+      <template #trigger>
+        <n-button ghost circle size="large" @click="showModal = true" id="home-source-btn"><n-icon size="30"><SourceIcon/></n-icon></n-button>
+      </template>
+      开源地址
     </n-tooltip>
     <n-dropdown @select="handleLangSelect" trigger="click" :options="langOptions">
       <n-button :keyboard="false" id="lang-choose">{{en?"choose language":"选择语言"}}</n-button>
@@ -15,27 +27,35 @@
         ref="name"
         @mouseenter="projectNameMouseEnter"
         @mouseleave="projectNameMouseLeave">
-        PROJECT {{heroine}}
+        <!-- PROJECT {{heroine}} -->
+        GITHUB HIERARCHICAL
       </h1>
-      <n-h6>{{en?"A":"一个"}} JAVADOC API {{en?" learning assistant system ":"学习助手服务"}}</n-h6>
+      <!-- <n-h6>{{en?"A":"一个"}} JAVADOC API {{en?" learning assistant system ":"学习助手服务"}}</n-h6>
       <p id="section-nav" class="home-p">{{en?"Start learn! From recommended ":"如果你是小白、不知从哪开始学，可以看看我们推荐的"}}<router-link class="link" to="/section"><n-gradient-text type="info">{{en?"learning entries":"学习入口"}}
 </n-gradient-text></router-link></p>
       <h2 class="home-h">{{en?"OR":"如果你想自己看看"}}</h2>
-      <p class="home-p">{{en?"":"可以用任何你想到的词来"}}<router-link class="link" to="/search"><n-gradient-text type="info">{{en?"Search APIs":"搜索API"}}</n-gradient-text></router-link>{{en?" you're interested in":""}}</p>
-      <!--div id="search-space">
-        <n-auto-complete
-          id="search-input"
-          :options="searchOptions"
-          v-model:value="searchValue"
-          size="large"
-          placeholder="input any word you think out, we will complete the rest :-)"
-        />
-        <n-button circle @click="onSearchClick">
-          <template #icon>
-            <n-icon><search /></n-icon>
-          </template>
-        </n-button>
-      </div!-->
+      <p class="home-p">{{en?"":"可以用任何你想到的词来"}}<router-link class="link" to="/search"><n-gradient-text type="info">{{en?"Search APIs":"搜索API"}}</n-gradient-text></router-link>{{en?" you're interested in":""}}</p> -->
+      <h2 class="home-p">基于Wikipedia软件开发领域的层级知识图谱</h2>
+      <h2 class="home-p">和Github Topic的层次结构的Github层次化学习与检索服务</h2>
+      <div id="search-container">
+        <n-dropdown @select="handleSearchSelect" trigger="click" :options="searchTypeOptions">
+          <n-button :keyboard="false" id="search-choose">{{repo?"搜索仓库":"搜索知识点"}}</n-button>
+        </n-dropdown>
+        <div id="search-space">
+          <n-auto-complete
+            id="search-input"
+            :options="searchOptions"
+            v-model:value="searchValue"
+            size="large"
+            placeholder="input any word you think out, we will complete the rest :-)"
+          />
+          <n-button circle @click="onSearchClick">
+            <template #icon>
+              <n-icon><SearchIcon /></n-icon>
+            </template>
+          </n-button>
+        </div>
+      </div>
     </n-space>
     <n-modal v-model:show="showModal">
       <n-card style="max-width: 1200px;" :title="en?'How to use this service to learn java API':'我怎么用这个服务学习java API？'" :bordered="false" size="huge">
@@ -89,14 +109,17 @@
 // @ is an alias to /src
 import { defineComponent } from 'vue'
 import { mapState, mapMutations } from 'vuex'
-import { Help as HelpIcon } from '@vicons/ionicons5'
+import { Help as HelpIcon, SearchOutline as SearchIcon, Mail as MailIcon, LogoGithub as SourceIcon } from '@vicons/ionicons5'
 
 let showed = false
 
 export default defineComponent({
   name: 'Home',
   components: {
-    HelpIcon
+    HelpIcon,
+    SearchIcon,
+    MailIcon,
+    SourceIcon
   },
   data () {
     return {
@@ -113,6 +136,16 @@ export default defineComponent({
           label: 'English',
           key: 'en'
         }
+      ],
+      searchTypeOptions: [
+        {
+          label: '搜索知识点',
+          key: 'know'
+        },
+        {
+          label: '搜索仓库',
+          key: 'repo'
+        }
       ]
     }
   },
@@ -125,6 +158,9 @@ export default defineComponent({
   methods: {
     handleLangSelect (key) {
       this.set_language(key)
+    },
+    handleSearchSelect (key) {
+      this.set_searchtype(key)
     },
     projectNameMouseEnter () {
       this.heroine = this.en ? 'HIKARI' : '光'
@@ -142,7 +178,8 @@ export default defineComponent({
       }
     },
     ...mapMutations({
-      set_language: 'set_language'
+      set_language: 'set_language',
+      set_searchtype: 'set_searchtype'
     })
   },
   computed: {
@@ -156,7 +193,8 @@ export default defineComponent({
       })
     },
     ...mapState({
-      en: 'en'
+      en: 'en',
+      repo: 'repo'
     })
   }
 })
@@ -165,7 +203,7 @@ export default defineComponent({
 <style scope>
 .home {
   text-align: center;
-  background: url("../assets/HOMURA.jpg");
+  background: url("../assets/hp169.jpg");
   width: 100%;
   height: 100%;
   background-size: cover;
@@ -189,21 +227,49 @@ export default defineComponent({
 }
 
 #search-space {
-  display: flex;
-  justify-content: center;
+  /* display: flex;
+  justify-content: center; */
+  order: 2; /* move it to the left */
 }
 
 #search-input {
-  width: 450px;
+  width: 550px;
   display: inline-block;
   margin-right: 20px;
 }
 
 #home-help-btn {
-  position: absolute;
-  top: 0;
+  /* position: absolute; */
+  /* top: 0;
   left: 0;
-  margin: 20px;
+  margin: 20px; */
+  position: fixed; /* position relative to the viewport */
+  bottom: 50px;
+  left: 20%;
+  margin: 50px;
+}
+
+#home-contact-btn {
+  /* position: absolute;
+  bottom: 50px;
+  left: 100px;
+  margin: 50px; */
+  position: fixed; /* position relative to the viewport */
+  bottom: 50px; /* set at the bottom edge of the viewport */
+  left: 50%; /* set at the horizontal center of the viewport */
+  transform: translateX(-100%);
+  margin: 50px; /* add some space around the element */
+}
+
+#home-source-btn {
+  /* position: absolute;
+  bottom: 50px;
+  left: 100px;
+  margin: 50px; */
+  position: fixed; /* position relative to the viewport */
+  bottom: 50px; /* set at the bottom edge of the viewport */
+  right: 20%; /* set at the horizontal center of the viewport */
+  margin: 50px; /* add some space around the element */
 }
 
 #lang-choose {
@@ -212,6 +278,28 @@ export default defineComponent({
   right: 0;
   margin: 20px;
 }
+
+#search-choose {
+  /* position: absolute;
+  top: 0;
+  right: 0;
+  margin: 20px; */
+  order: 1; /* move it to the right */
+}
+
+#search-container {
+  display: flex; /* make it a flex container */
+  flex-direction: row; /* arrange the items horizontally */
+  justify-content: center; /* center the items along the main axis */
+  align-items: center; /* center the items along the cross axis */
+  margin-top: 50px; /* add 50 pixels of space above the element */
+}
+
+/* #search-choose {
+}
+
+#search-space {
+} */
 
 .home-p {
   font-size: x-large;
