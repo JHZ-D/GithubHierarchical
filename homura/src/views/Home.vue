@@ -20,9 +20,6 @@
       开源地址
     </n-tooltip>
         </a>
-    <n-dropdown @select="handleLangSelect" trigger="click" :options="langOptions">
-      <n-button :keyboard="false" id="lang-choose">{{en?"choose language":"选择语言"}}</n-button>
-    </n-dropdown>
     <n-space vertical>
       <h1
         id="project-name"
