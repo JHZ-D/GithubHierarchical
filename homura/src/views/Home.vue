@@ -8,12 +8,17 @@
     </n-tooltip>
     <n-tooltip trigger="hover">
       <template #trigger>
-        <n-button ghost circle size="large" @click="showModal = true" id="home-contact-btn"><n-icon size="30"><MailIcon/></n-icon></n-button>
+        <n-button ghost circle size="large" @click="showContact = true" id="home-contact-btn"><n-icon size="30"><MailIcon/></n-icon></n-button>
       </template>
       联系我们
     </n-tooltip>
     <n-tooltip trigger="hover">
       <template #trigger>
+        <!-- <n-button ghost circle size="large" @click="showContact = true" id="home-source-btn"><n-icon size="30"><SourceIcon/></n-icon></n-button> -->
+        <!-- <n-hutton> Repo Link <n-icon size="30"><SourceIcon/></n-icon></n-hutton> -->
+        <!-- <a href="https://github.com/JHZ-D/Wikipedia-graph-constructor"> -->
+          <!-- <n-button ghost circle size="large" id="home-source-btn"><n-icon size="30"><SourceIcon/></n-icon></n-button> -->
+        <!-- </a> -->
         <n-button ghost circle size="large" @click="showModal = true" id="home-source-btn"><n-icon size="30"><SourceIcon/></n-icon></n-button>
       </template>
       开源地址
@@ -58,8 +63,18 @@
       </div>
     </n-space>
     <n-modal v-model:show="showModal">
-      <n-card style="max-width: 1200px;" :title="en?'How to use this service to learn java API':'我怎么用这个服务学习java API？'" :bordered="false" size="huge">
-        <n-steps :current="current" status="process">
+      <n-card style="max-width: 1200px; " :title="如何使用" :bordered="false" size="huge">
+        <div>
+          <p>本系统为Github层次化学习与检索系统，由层次化学习系统和层次化检索系统组成。您可以点击搜索框左边的下拉框选择搜索知识点或搜索仓库。</p>
+          <p>选择搜索知识点，您可以搜索Wikipedia软件开发领域的知识或Github Topic代表的知识，从而进入Github层次化学习系统。</p>
+          <p>选择搜索仓库，您可以搜索Github上的仓库，从而进入Github层次化检索系统。</p>
+          <n-button
+            @click="handleButtonClick"
+          >
+            确定
+          </n-button>
+        </div>
+        <!-- <n-steps :current="current" status="process">
           <n-step :title="en?'Find an API to learn':'首先寻找要学习的API'">
             <div class="n-step-description">
               <p v-if="en">Choose one API to start your learn journey~ If you are a complete novice, don't know where to start, you can browse some popular <router-link class="link" to="/section"><n-gradient-text type="info">Learning Entries</n-gradient-text></router-link> we prepare for you and find out what you interested in.</p>
@@ -99,7 +114,20 @@
               </n-button>
             </div>
           </n-step>
-        </n-steps>
+        </n-steps> -->
+      </n-card>
+    </n-modal>
+    <n-modal v-model:show="showContact">
+      <n-card style="max-width: 1200px; " :title="联系方式" :bordered="false" size="huge">
+        <div>
+          <p>电话：13321132034</p>
+          <p>邮箱：1336024978@qq.com</p>
+          <n-button
+            @click="handleButtonClickContact"
+          >
+            确定
+          </n-button>
+        </div>
       </n-card>
     </n-modal>
   </div>
@@ -111,7 +139,7 @@ import { defineComponent } from 'vue'
 import { mapState, mapMutations } from 'vuex'
 import { Help as HelpIcon, SearchOutline as SearchIcon, Mail as MailIcon, LogoGithub as SourceIcon } from '@vicons/ionicons5'
 
-let showed = false
+// let showed = false
 
 export default defineComponent({
   name: 'Home',
@@ -127,6 +155,8 @@ export default defineComponent({
       heroine: 'HOMURA',
       current: 1,
       showModal: false,
+      showContact: false,
+      // showSource: false,
       langOptions: [
         {
           label: '中文',
@@ -149,12 +179,12 @@ export default defineComponent({
       ]
     }
   },
-  mounted () {
-    if (!showed) {
-      showed = true
-      this.showModal = true
-    }
-  },
+  // mounted () {
+  //   if (!showed) {
+  //     showed = true
+  //     this.showModal = true
+  //   }
+  // },
   methods: {
     handleLangSelect (key) {
       this.set_language(key)
@@ -171,11 +201,20 @@ export default defineComponent({
       this.$refs.name.style.color = '#F1394B'
     },
     handleButtonClick () {
-      if (this.current === 3) {
-        this.showModal = false
-      } else {
-        this.current = (this.current % 3) + 1
-      }
+      // if (this.current === 3) {
+      //   this.showModal = false
+      // } else {
+      //   this.current = (this.current % 3) + 1
+      // }
+      this.showModal = false
+    },
+    handleButtonClickContact () {
+      // if (this.current === 3) {
+      //   this.showModal = false
+      // } else {
+      //   this.current = (this.current % 3) + 1
+      // }
+      this.showContact = false
     },
     ...mapMutations({
       set_language: 'set_language',
@@ -294,6 +333,11 @@ export default defineComponent({
   align-items: center; /* center the items along the cross axis */
   margin-top: 50px; /* add 50 pixels of space above the element */
 }
+
+/* #confirm-button {
+  position: absolute;
+  right: 50%;
+} */
 
 /* #search-choose {
 }
