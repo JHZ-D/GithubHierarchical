@@ -12,17 +12,14 @@
       </template>
       联系我们
     </n-tooltip>
+        <a href="https://github.com/JHZ-D/Wikipedia-graph-constructor">
     <n-tooltip trigger="hover">
       <template #trigger>
-        <!-- <n-button ghost circle size="large" @click="showContact = true" id="home-source-btn"><n-icon size="30"><SourceIcon/></n-icon></n-button> -->
-        <!-- <n-hutton> Repo Link <n-icon size="30"><SourceIcon/></n-icon></n-hutton> -->
-        <!-- <a href="https://github.com/JHZ-D/Wikipedia-graph-constructor"> -->
-          <!-- <n-button ghost circle size="large" id="home-source-btn"><n-icon size="30"><SourceIcon/></n-icon></n-button> -->
-        <!-- </a> -->
-        <n-button ghost circle size="large" @click="showModal = true" id="home-source-btn"><n-icon size="30"><SourceIcon/></n-icon></n-button>
+          <n-button ghost circle size="large" id="home-source-btn"><n-icon size="30"><SourceIcon/></n-icon></n-button>
       </template>
       开源地址
     </n-tooltip>
+        </a>
     <n-dropdown @select="handleLangSelect" trigger="click" :options="langOptions">
       <n-button :keyboard="false" id="lang-choose">{{en?"choose language":"选择语言"}}</n-button>
     </n-dropdown>
@@ -52,7 +49,7 @@
             :options="searchOptions"
             v-model:value="searchValue"
             size="large"
-            placeholder="input any word you think out, we will complete the rest :-)"
+            placeholder="输入知识点，如Software development, Java, Spring, vue..."
           />
           <n-button circle @click="onSearchClick">
             <template #icon>
@@ -68,6 +65,7 @@
           <p>本系统为Github层次化学习与检索系统，由层次化学习系统和层次化检索系统组成。您可以点击搜索框左边的下拉框选择搜索知识点或搜索仓库。</p>
           <p>选择搜索知识点，您可以搜索Wikipedia软件开发领域的知识或Github Topic代表的知识，从而进入Github层次化学习系统。</p>
           <p>选择搜索仓库，您可以搜索Github上的仓库，从而进入Github层次化检索系统。</p>
+          <p>您也可以通过页面左侧导航进入学习系统或检索系统。</p>
           <n-button
             @click="handleButtonClick"
           >
@@ -324,6 +322,10 @@ export default defineComponent({
   right: 0;
   margin: 20px; */
   order: 1; /* move it to the right */
+  width: 100px;
+  height: 40px;
+  background-color: aliceblue;
+  /* color: red; */
 }
 
 #search-container {
@@ -331,7 +333,7 @@ export default defineComponent({
   flex-direction: row; /* arrange the items horizontally */
   justify-content: center; /* center the items along the main axis */
   align-items: center; /* center the items along the cross axis */
-  margin-top: 50px; /* add 50 pixels of space above the element */
+  margin-top: 100px; /* add 50 pixels of space above the element */
 }
 
 /* #confirm-button {
