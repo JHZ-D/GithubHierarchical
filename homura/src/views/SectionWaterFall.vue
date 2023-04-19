@@ -2,7 +2,7 @@
   <n-layout>
     <n-layout-header bordered id="header">
       <n-space id="head-space" size="large" align="baseline">
-        <n-h1>{{en?"Exploring Learning Entries":"学习入口推荐"}}</n-h1>
+        <n-h1>Github层次化学习系统</n-h1>
         <n-tooltip trigger="hover">
           <template #trigger>
             <n-button ghost circle size="small" @click="showModal = true"><n-icon size="20"><help-icon/></n-icon></n-button>
@@ -49,6 +49,7 @@ import router from '../router'
 import { useMessage, useNotification, NAvatar } from 'naive-ui'
 import { Help as HelpIcon } from '@vicons/ionicons5'
 import { mapState } from 'vuex'
+// import G6 from '@antv/g6'
 
 const loadLimit = 20
 let WFmaxContentHeight = 0
