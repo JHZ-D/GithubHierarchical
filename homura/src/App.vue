@@ -39,8 +39,6 @@ import { NIcon } from 'naive-ui'
 import { mapActions, mapState } from 'vuex'
 import {
   HomeOutline as HomeIcon,
-  BulbOutline as BulbIcon,
-  MapOutline as MapIcon,
   BookOutline as BookIcon,
   SearchOutline as SearchIcon
 } from '@vicons/ionicons5'
@@ -55,29 +53,19 @@ export default defineComponent({
       collapsed: true,
       menuItems: [
         {
-          label: this.en ? 'Home Page' : '主页',
+          label: '主页',
           key: 'home',
           icon: renderIcon(HomeIcon)
         },
         {
-          label: this.en ? 'Search Page' : '搜索',
+          label: '层次化学习系统',
+          key: 'section',
+          icon: renderIcon(BookIcon)
+        },
+        {
+          label: '层次化检索系统',
           key: 'search',
           icon: renderIcon(SearchIcon)
-        },
-        {
-          label: this.en ? 'Learning Entries' : '学习入口推荐',
-          key: 'section',
-          icon: renderIcon(BulbIcon)
-        },
-        {
-          label: this.en ? 'Learning Roadmap' : 'API路线图',
-          key: 'roadmap',
-          icon: renderIcon(MapIcon)
-        },
-        {
-          label: this.en ? 'view SO threads about API' : 'API讨论详情',
-          key: 'detail',
-          icon: renderIcon(BookIcon)
         }
       ]
     }
@@ -117,4 +105,7 @@ export default defineComponent({
 </script>
 
 <style>
+.n-menu-item {
+  margin: 20px 0;
+}
 </style>
