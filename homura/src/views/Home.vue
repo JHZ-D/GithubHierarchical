@@ -27,8 +27,7 @@
       <h1
         id="project-name"
         ref="name"
-        @mouseenter="projectNameMouseEnter"
-        @mouseleave="projectNameMouseLeave">
+        >
         <!-- PROJECT {{heroine}} -->
         GITHUB HIERARCHICAL
       </h1>
@@ -248,10 +247,11 @@ export default defineComponent({
 
 #project-name {
   margin-top: 50px;
-  color: #F1394B;
+  /* color: #F1394B; */
+  color: royalblue;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 900;
-  font-size: 500%;
+  font-size: 600%;
 }
 
 #section-nav .link {
