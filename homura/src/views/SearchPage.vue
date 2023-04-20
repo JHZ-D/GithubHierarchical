@@ -1,5 +1,7 @@
 <template>
   <div class="search-home">
+    <MultiSearch ></MultiSearch>
+    <!-- <MultilevelSelecter :placeholders="['省','市']" :id-field="'adcode'" :levels='2' :name-field="'name'" :loader="loader" @on-change="onCityChange">城市：</MultilevelSelecter> -->
     <n-layout style="{background-color:rgba(0,0,0,0)}">
       <n-layout-header>
         <div id="search-space">
@@ -42,12 +44,16 @@ import { defineComponent } from 'vue'
 import { Search, TrashOutline } from '@vicons/ionicons5'
 import { mapState, mapMutations } from 'vuex'
 import { useMessage } from 'naive-ui'
+// import MultilevelSelecter from '../components/MultilevelSelecter.vue'
+import MultiSearch from '../components/MultiSearch.vue'
 
 let loadingMessage = null
 
 export default defineComponent({
   components: {
-    Search
+    Search,
+    // MultilevelSelecter
+    MultiSearch
   },
   created () {
     const message = useMessage()
