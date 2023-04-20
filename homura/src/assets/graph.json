@@ -1,0 +1,56 @@
+{
+    "nodes": [{
+        "id": "Web development",
+        "shape": "ellipse"
+    },{
+        "id": "javascript",
+        "shape": "circle"
+    },{
+        "id": "css",
+        "shape": "circle"
+    },{
+        "id": "bootstrap",
+        "shape": "circle"
+    },{
+        "id": "grid",
+        "shape": "circle"
+    },{
+        "id": "jquery",
+        "shape": "circle"
+    },{
+        "id": "jquery/jquery",
+        "shape": "rect"
+    },{
+        "id": "FancyGrid/FancyGrid",
+        "shape": "rect"
+    }],
+    "edges": [{
+        "id": "edge1",
+        "source": "Web development",
+        "target": "javascript"
+    },{
+        "id": "edge2",
+        "source": "javascript",
+        "target": "css"
+    },{
+        "id": "edge3",
+        "source": "css",
+        "target": "bootstrap"
+    },{
+        "id": "edge4",
+        "source": "css",
+        "target": "grid"
+    },{
+        "id": "edge5",
+        "source": "javascript",
+        "target": "jquery"
+    },{
+        "id": "edge6",
+        "source": "jquery",
+        "target": "jquery/jquery"
+    },{
+        "id": "edge7",
+        "source": "jquery",
+        "target": "FancyGrid/FancyGrid"
+    }]
+}

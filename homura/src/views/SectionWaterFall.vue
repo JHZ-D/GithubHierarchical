@@ -5,25 +5,57 @@
         <n-h1>Github层次化学习系统</n-h1>
         <n-tooltip trigger="hover">
           <template #trigger>
-            <n-button ghost circle size="small" @click="showModal = true"><n-icon size="20"><help-icon/></n-icon></n-button>
+            <n-button ghost circle size="small" @click="showModal = true"><n-icon
+                size="20"><help-icon /></n-icon></n-button>
           </template>
-          {{en?"What is a learning entry?":"什么是学习入口？"}}
+          {{ en ? "What is a learning entry?" : "什么是学习入口？" }}
         </n-tooltip>
       </n-space>
     </n-layout-header>
+    <n-grid :cols="2" :rows="1" :col-gap="16" :row-gap="16">
+      <n-grid-item span="1">
+        <template>
+          <div>
+            <div id="mountNode"></div>
+          </div>
+        </template>
+      </n-grid-item>
+      <n-grid-item span="1">
+        <n-card title="jQuery">
+          jQuery is a lightweight library that simplifies programming with JavaScript. It builds on top of browser
+          function and accomplishes programming tasks with fewer lines of code.
+        </n-card>
+      </n-grid-item>
+    </n-grid>
     <n-layout style="height: 93vh;">
       <div class="waterfall-container" @scroll="handleScroll">
         <n-modal v-model:show="showModal">
-          <n-card style="width: 600px;" :title="en?'What is a learning entry?':'什么是学习入口？'" :bordered="false" size="huge">
-            <p v-if="en">A learning entry is a set of APIs which we guess you may be interested in <n-gradient-text type="danger"> :) </n-gradient-text> This set of APIs are frequently discussed together in the <n-gradient-text type="danger"> Stack Overflow (SO) </n-gradient-text> due to our analysis on SO</p>
-            <p v-else>一个学习入口是指一组我们推荐给您学习的java API<n-gradient-text type="danger"> :-) </n-gradient-text> 我们通过分析<n-gradient-text type="danger"> Stack Overflow (SO) </n-gradient-text>中关于API的讨论纪录为您推荐这些API，确保一组学习入口中的API是常用的、且彼此之间有着密切关系（经常被拿来在一起讨论）的。</p>
-            <p v-if="en">If you are a start learner, who don't know where to start learning this <n-gradient-text type="danger">HUGE AMOUNT</n-gradient-text> of APIS. You can view these learning entries as your please and find a learning entry to start viewing these APIs</p>
+          <n-card style="width: 600px;" :title="en ? 'What is a learning entry?' : '什么是学习入口？'" :bordered="false"
+            size="huge">
+            <p v-if="en">A learning entry is a set of APIs which we guess you may be interested in <n-gradient-text
+                type="danger"> :) </n-gradient-text> This set of APIs are frequently discussed together in the
+              <n-gradient-text type="danger"> Stack Overflow (SO) </n-gradient-text> due to our analysis on SO
+            </p>
+            <p v-else>一个学习入口是指一组我们推荐给您学习的java API<n-gradient-text type="danger"> :-) </n-gradient-text>
+              我们通过分析<n-gradient-text type="danger"> Stack Overflow (SO)
+              </n-gradient-text>中关于API的讨论纪录为您推荐这些API，确保一组学习入口中的API是常用的、且彼此之间有着密切关系（经常被拿来在一起讨论）的。</p>
+            <p v-if="en">If you are a start learner, who don't know where to start learning this <n-gradient-text
+                type="danger">HUGE AMOUNT</n-gradient-text> of APIS. You can view these learning entries as your please
+              and find a learning entry to start viewing these APIs</p>
             <p v-else>如果您是个java初学者，面对javadoc中数量庞大的API、不知道从哪开始学起，您可以尝试看看这些学习入口中为您推荐的API</p>
-            <p v-if="en">However, viewing API names may not give you a deep impression about what these APIs are exactly talking about. Therefore, we append every learning entry a set of <n-gradient-text type="danger">popular questions</n-gradient-text> from SO that talk about these APIs, which could give you a better view. Hopeing these popular questions can help you find your interest better :)</p>
-            <p v-else>为了让初学者也能一眼就看出来每个学习入口中的API主要是干什么用的，我们为每个学习入口打上了<n-gradient-text type="danger">主题标签</n-gradient-text>、来展示和这组API最相关的一些主题词汇，同时也附加了一个在SO社区中对这些API进行讨论的颇具代表性的问题。希望能够帮您快速开始 :-)</p>
-            <n-gradient-text :size="24" type="danger">{{en?"BE AWARE":"注意事项"}}</n-gradient-text>
-            <p v-if="en">If you are an experienced developer about this SDK, you may refer to the <n-gradient-text type="danger">search feature</n-gradient-text> we provided in <router-link class="link" to="/roadmap"><n-gradient-text type="info">here</n-gradient-text></router-link>.</p>
-            <p v-else>如果您觉得这些API您都会的不行，您可能已经是个有点基础的学习者了，您可以尝试我们提供的<router-link class="link" to="/roadmap"><n-gradient-text type="info">搜索功能</n-gradient-text></router-link>来找找看和自己感兴趣主题相关的API。</p>
+            <p v-if="en">However, viewing API names may not give you a deep impression about what these APIs are exactly
+              talking about. Therefore, we append every learning entry a set of <n-gradient-text type="danger">popular
+                questions</n-gradient-text> from SO that talk about these APIs, which could give you a better view.
+              Hopeing these popular questions can help you find your interest better :)</p>
+            <p v-else>为了让初学者也能一眼就看出来每个学习入口中的API主要是干什么用的，我们为每个学习入口打上了<n-gradient-text
+                type="danger">主题标签</n-gradient-text>、来展示和这组API最相关的一些主题词汇，同时也附加了一个在SO社区中对这些API进行讨论的颇具代表性的问题。希望能够帮您快速开始 :-)
+            </p>
+            <n-gradient-text :size="24" type="danger">{{ en ? "BE AWARE" : "注意事项" }}</n-gradient-text>
+            <p v-if="en">If you are an experienced developer about this SDK, you may refer to the <n-gradient-text
+                type="danger">search feature</n-gradient-text> we provided in <router-link class="link"
+                to="/roadmap"><n-gradient-text type="info">here</n-gradient-text></router-link>.</p>
+            <p v-else>如果您觉得这些API您都会的不行，您可能已经是个有点基础的学习者了，您可以尝试我们提供的<router-link class="link" to="/roadmap"><n-gradient-text
+                  type="info">搜索功能</n-gradient-text></router-link>来找找看和自己感兴趣主题相关的API。</p>
           </n-card>
         </n-modal>
         <div class="waterfall-content">
@@ -49,7 +81,8 @@ import router from '../router'
 import { useMessage, useNotification, NAvatar } from 'naive-ui'
 import { Help as HelpIcon } from '@vicons/ionicons5'
 import { mapState } from 'vuex'
-// import G6 from '@antv/g6'
+import G6 from '@antv/g6'
+import graphdata from '@/assets/graph.json'
 
 const loadLimit = 20
 let WFmaxContentHeight = 0
@@ -63,7 +96,9 @@ export default defineComponent({
       currentPage: 0,
       loadOver: false,
       messageBox: undefined,
-      showModal: false
+      showModal: false,
+      jsonGraphData: graphdata,
+      graph: null
     }
   },
   components: {
@@ -101,6 +136,7 @@ export default defineComponent({
           })
       })
     }
+    this.initG6()
   },
   methods: {
     async fetchSections () {
@@ -157,6 +193,33 @@ export default defineComponent({
         this.loadEnabled = false
         this.fetchSections()
       }
+    },
+    initG6 () {
+      const graphData = this.jsonGraphData
+      this.graph = new G6.Graph({
+        container: 'mountNode',
+        width: 800,
+        height: 500,
+        defaultNode: {
+          size: 30,
+          style: {
+            fill: '#C6E5FF',
+            stroke: '#5B8FF9'
+          }
+        },
+        defaultEdge: {
+          size: 1,
+          color: '#e2e2e2',
+          shape: 'cubic-vertical',
+          style: {
+            endArrow: true,
+            lineWidth: 2,
+            stroke: '#666'
+          }
+        }
+      })
+      this.graph.data(graphData)
+      this.graph.render()
     }
   },
   computed: {
@@ -213,6 +276,4 @@ export default defineComponent({
   align-items: left;
   padding-top: 20px;
   padding-left: 25px;
-}
-
-</style>
+}</style>

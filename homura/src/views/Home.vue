@@ -30,7 +30,7 @@
       </h1>
       <!-- <n-h6>{{en?"A":"一个"}} JAVADOC API {{en?" learning assistant system ":"学习助手服务"}}</n-h6>
       <p id="section-nav" class="home-p">{{en?"Start learn! From recommended ":"如果你是小白、不知从哪开始学，可以看看我们推荐的"}}<router-link class="link" to="/section"><n-gradient-text type="info">{{en?"learning entries":"学习入口"}}
-</n-gradient-text></router-link></p>
+      </n-gradient-text></router-link></p>
       <h2 class="home-h">{{en?"OR":"如果你想自己看看"}}</h2>
       <p class="home-p">{{en?"":"可以用任何你想到的词来"}}<router-link class="link" to="/search"><n-gradient-text type="info">{{en?"Search APIs":"搜索API"}}</n-gradient-text></router-link>{{en?" you're interested in":""}}</p> -->
       <h2 class="home-p">基于Wikipedia软件开发领域的层级知识图谱</h2>
