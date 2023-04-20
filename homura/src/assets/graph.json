@@ -1,28 +1,36 @@
 {
     "nodes": [{
         "id": "Web development",
-        "shape": "ellipse"
+        "type": "ellipse",
+        "label": "Web development"
     },{
         "id": "javascript",
-        "shape": "circle"
+        "label": "javascript",
+        "type": "circle"
     },{
         "id": "css",
-        "shape": "circle"
+        "label": "css",
+        "type": "circle"
     },{
         "id": "bootstrap",
-        "shape": "circle"
-    },{
-        "id": "grid",
-        "shape": "circle"
+        "label": "bootstrap",
+        "type": "circle"
     },{
         "id": "jquery",
-        "shape": "circle"
+        "label": "jquery",
+        "type": "circle"
+    },{
+        "id": "grid",
+        "label": "grid",
+        "type": "circle"
     },{
         "id": "jquery/jquery",
-        "shape": "rect"
+        "label": "jquery/jquery",
+        "type": "rect"
     },{
         "id": "FancyGrid/FancyGrid",
-        "shape": "rect"
+        "label": "FancyGrid/FancyGrid",
+        "type": "rect"
     }],
     "edges": [{
         "id": "edge1",
@@ -42,7 +50,7 @@
         "target": "grid"
     },{
         "id": "edge5",
-        "source": "javascript",
+        "source": "css",
         "target": "jquery"
     },{
         "id": "edge6",

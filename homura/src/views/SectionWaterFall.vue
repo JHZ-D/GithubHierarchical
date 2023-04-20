@@ -1,7 +1,7 @@
 <template>
   <n-layout>
     <n-layout-header bordered id="header">
-      <n-space id="head-space" size="large" align="baseline">
+      <n-space id="head-space" size="huge" align="baseline">
         <n-h1>Github层次化学习系统</n-h1>
         <n-tooltip trigger="hover">
           <template #trigger>
@@ -12,18 +12,19 @@
         </n-tooltip>
       </n-space>
     </n-layout-header>
-    <n-grid :cols="2" :rows="1" :col-gap="16" :row-gap="16">
+    <n-grid :cols="2" :rows="1" :col-gap="32" :row-gap="16" class="grid">
       <n-grid-item span="1">
-        <template>
-          <div>
-            <div id="mountNode"></div>
-          </div>
-        </template>
+        <div>
+          <div class="g6-x" id="containerG6" ref="containerG6"></div>
+        </div>
       </n-grid-item>
       <n-grid-item span="1">
-        <n-card title="jQuery">
-          jQuery is a lightweight library that simplifies programming with JavaScript. It builds on top of browser
-          function and accomplishes programming tasks with fewer lines of code.
+        <n-card title="jQuery" size="huge" class="card">
+          jQuery is a JavaScript framework designed to simplify HTML DOM tree traversal and manipulation, as well as event handling, CSS animation, and Ajax. It is free, open-source software using the permissive MIT License. As of Aug 2022, jQuery is used by 77% of the 10 million most popular websites. Web analysis indicates that it is the most widely deployed JavaScript library by a large margin, having at least 3 to 4 times more usage than any other JavaScript library.
+          <br><br><br>
+          Wikipedia Link: <a href="https://en.wikipedia.org/wiki/JQuery">https://en.wikipedia.org/wiki/JQuery</a>
+          <br><br>
+          Github Topic Link: <a href="https://github.com/topics/jquery">https://github.com/topics/jquery</a>
         </n-card>
       </n-grid-item>
     </n-grid>
@@ -195,30 +196,78 @@ export default defineComponent({
       }
     },
     initG6 () {
-      const graphData = this.jsonGraphData
+      // const graphData = this.jsonGraphData
+      const containerG6 = this.$refs.containerG6
+      const nodes = this.jsonGraphData.nodes
+      // const edges = this.jsonGraphData.edges
+      nodes.forEach(node => {
+        node.label = node.id
+        if (!node.style) {
+          node.style = {}
+        }
+        switch (node.type) {
+          case 'ellipse': {
+            node.size = [120, 40]
+            node.style.fill = '#afb4db'
+            break
+          }
+          case 'rect': {
+            node.size = [130, 40]
+            node.style.fill = '#008792'
+            break
+          }
+          case 'circle': {
+            node.size = 80
+            node.style.fill = '#C6E5FF'
+            break
+          }
+        }
+        if (node.id === 'jquery') {
+          node.style.stroke = '#ffd400'
+          node.style.lineWidth = 3
+        }
+      })
+
       this.graph = new G6.Graph({
-        container: 'mountNode',
-        width: 800,
-        height: 500,
+        container: containerG6,
+        // width: 800,
+        height: 800,
+        modes: {
+          default: ['drag-canvas', 'zoom-canvas']
+        },
         defaultNode: {
-          size: 30,
+          // size: [100, 40],
           style: {
-            fill: '#C6E5FF',
+            // fill: '#C6E5FF',
             stroke: '#5B8FF9'
+          },
+          labelCfg: {
+            style: {
+              fill: '#00287E',
+              fontSize: 12
+            }
           }
         },
         defaultEdge: {
-          size: 1,
-          color: '#e2e2e2',
-          shape: 'cubic-vertical',
+          // type: 'cubic-vertical',
+          type: 'line',
           style: {
-            endArrow: true,
-            lineWidth: 2,
-            stroke: '#666'
+            stroke: '#A3B1BF',
+            // endArrow: true
+            endArrow: {
+              path: G6.Arrow.vee(5, 20, 15), // 使用内置箭头路径函数，参数为箭头的 宽度、长度、偏移量（默认为 0，与 d 对应）
+              d: 15
+            }
           }
+        },
+        layout: {
+          type: 'dagre',
+          rankdir: 'TB',
+          nodesep: 30,
+          ranksep: 30
         }
       })
-      this.graph.data(graphData)
+      this.graph.data(this.jsonGraphData)
       this.graph.render()
     }
   },
@@ -268,12 +317,26 @@ export default defineComponent({
   text-align: center;
 }
 
+.g6-x {
+  /* width: 800px; */
+  height: 800px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  margin-left: 20px;
+}
+
+.grid {
+    margin-top: 50px;
+    margin-left: 80px;
+    margin-right: 50px;
+}
+
 #header {
-  height: 7vh;
+  height: 8vh;
   justify-content: center;
   display: flex;
   flex-direction: column;
   align-items: left;
-  padding-top: 20px;
-  padding-left: 25px;
+  padding-top: 40px;
+  padding-left: 55px;
 }</style>
