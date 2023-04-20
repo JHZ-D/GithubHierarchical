@@ -319,6 +319,7 @@ export default defineComponent({
 
 .g6-x {
   /* width: 800px; */
+  width: 80%;
   height: 800px;
   box-sizing: border-box;
   border: 1px solid #ccc;
@@ -329,6 +330,7 @@ export default defineComponent({
     margin-top: 50px;
     margin-left: 80px;
     margin-right: 50px;
+    width: 90%;
 }
 
 #header {
