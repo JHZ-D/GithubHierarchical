@@ -1,63 +1,65 @@
 <template>
-  <div class="search-home">
-    <MultiSearch ></MultiSearch>
-    <!-- <MultilevelSelecter :placeholders="['省','市']" :id-field="'adcode'" :levels='2' :name-field="'name'" :loader="loader" @on-change="onCityChange">城市：</MultilevelSelecter> -->
-    <n-layout style="{background-color:rgba(0,0,0,0)}">
-      <n-layout-header>
+  <n-space vertical size="large">
+    <div>
+  <n-layout>
+    <n-layout-header bordered id="header">
+      <n-space id="head-space" size="huge" align="baseline">
+        <n-h1>Github层次化检索系统</n-h1>
+        <n-tooltip trigger="hover">
+          <template #trigger>
+            <n-button ghost circle size="small" @click="showModal = true"><n-icon
+                size="20"><help-icon /></n-icon></n-button>
+          </template>
+          {{ en ? "What is a learning entry?" : "什么是学习入口？" }}
+        </n-tooltip>
+      </n-space>
+    </n-layout-header>
+    <n-layout-content>
+      <div id="search-container">
+        <MultiSearchBread ></MultiSearchBread>
         <div id="search-space">
-          <n-auto-complete
+        <n-auto-complete
             id="search-input"
+            :options="searchOptions"
             v-model:value="searchValue"
             size="large"
-            :placeholder="en?'input any word you think out, we will complete the rest :-)':'输入你能想到的任何词，我们总能找到点什么（大概'"
-          />
-          <n-button circle @click="onSearchClick">
+            placeholder="搜索仓库"
+        />
+        <n-button circle @click="onSearchClick">
             <template #icon>
-              <n-icon><search /></n-icon>
+            <n-icon><Search /></n-icon>
             </template>
-          </n-button>
+        </n-button>
         </div>
-      </n-layout-header>
-      <n-layout id = "result-layout">
-        <n-card
-          id="result-card"
-          :title="en?'Search Result':'搜索结果'"
-          size = "huge"
-          :bordered="false">
-          <n-list>
-            <n-list-item v-for="item in literal_items" :key="item.id">
-              <template #suffix>
-                <n-button @click="onViewClick(item)">{{en?"browse in Roadmap":"在路线图中查看"}}</n-button>
-              </template>
-              <n-thing :title="item.name" :description="item.description">
-              </n-thing>
-            </n-list-item>
-          </n-list>
-        </n-card>
-      </n-layout>
-    </n-layout>
-  </div>
+      </div>
+    </n-layout-content>
+  </n-layout>
+</div>
+    <div class="card">
+      <n-card title="jQuery" size="huge">
+        jQuery is a JavaScript framework designed to simplify HTML DOM tree traversal and manipulation, as well as event handling, CSS animation, and Ajax. It is free, open-source software using the permissive MIT License. As of Aug 2022, jQuery is used by 77% of the 10 million most popular websites. Web analysis indicates that it is the most widely deployed JavaScript library by a large margin, having at least 3 to 4 times more usage than any other JavaScript library.
+        <br><br><br>
+        Wikipedia Link: <a href="https://en.wikipedia.org/wiki/JQuery">https://en.wikipedia.org/wiki/JQuery</a>
+        <br><br>
+        Github Topic Link: <a href="https://github.com/topics/jquery">https://github.com/topics/jquery</a>
+      </n-card>
+    </div>
+</n-space>
 </template>
 
 <script>
 import { defineComponent } from 'vue'
-import { Search, TrashOutline } from '@vicons/ionicons5'
+import { Search, TrashOutline, Help as HelpIcon } from '@vicons/ionicons5'
 import { mapState, mapMutations } from 'vuex'
-import { useMessage } from 'naive-ui'
-// import MultilevelSelecter from '../components/MultilevelSelecter.vue'
-import MultiSearch from '../components/MultiSearch.vue'
-
-let loadingMessage = null
-
+import MultiSearchBread from '../components/MultiSearchBread.vue'
 export default defineComponent({
   components: {
     Search,
     // MultilevelSelecter
-    MultiSearch
+    MultiSearchBread,
+    HelpIcon
   },
   created () {
-    const message = useMessage()
-    this.messageBox = message
   },
   data () {
     return {
@@ -71,17 +73,12 @@ export default defineComponent({
       if (this.searchValue === '') {
         return
       }
-      loadingMessage = this.messageBox.loading('loading thread info', { duration: 5000 })
       const paramObj = {
         query: this.searchValue
       }
       const literalRes = await this.$http.post(this.loadUrl, paramObj)
       const literalData = literalRes.data.data
       this.literal_items = literalData
-      if (loadingMessage) {
-        loadingMessage.destroy()
-        loadingMessage = null
-      }
       this.messageBox.success('thread info list loaded', { duration: 500 })
     },
     onViewClick (item) {
@@ -122,43 +119,34 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
-.search-home {
-  text-align: center;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
+<style>
+#search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: space-between;
+
+    /* width: 50%; */
 }
 
-#search-space {
-  display: flex;
-  justify-content: center;
-  margin: 20px;
-}
-
-#search-input {
-  width: 450px;
-  display: inline-block;
-  margin-right: 20px;
-}
-
-#result-content {
-  overflow: scroll;
-}
-
-#result-layout {
-  justify-content: center;
-  display: flex;
-  flex-direction: row;
-}
-
-#result-card {
-  overflow: auto;
-  margin: 20px;
-  border-radius: 15px;
-  box-shadow: 0 2px 10px 2px rgba(0, 0, 0, .08);
-  height: 100%;
-  max-width:708px;
+.card {
+  padding: 10px;
   word-break: break-all;
+  width: 80%;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px #888888;
+  margin-bottom: 20px;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 5%;
 }
+
+/* #search-space {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+} */
 </style>

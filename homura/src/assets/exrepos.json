@@ -1,0 +1,21 @@
+[
+    "remult/remult",
+    "ikismail/Vue-ShoppingCart",
+    "micheleriva/krabs",
+    "i18next/i18next-express-middleware",
+    "jochen-schweizer/express-prom-bundle",
+    "mrmodise/nodejs-ecommerce-store",
+    "graphql/express-graphql",
+    "LionC/express-basic-auth",
+    "mongo-express/mongo-express",
+    "altair-graphql/altair",
+    "brannondorsey/host-validation",
+    "ExpressGateway/express-gateway",
+    "eddiejibson/limitrr",
+    "cdimascio/express-openapi-validator",
+    "muratcorlu/connect-api-mocker",
+    "arb/celebrate",
+    "yuvraj24/WhatsApp-Clone",
+    "60frames/webpack-hot-server-middleware",
+    "richardgirges/express-fileupload"
+]
