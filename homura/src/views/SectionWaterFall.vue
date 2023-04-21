@@ -19,17 +19,26 @@
         </div>
       </n-grid-item>
       <n-grid-item span="1">
-        <n-card title="jQuery" size="huge" class="card">
-          jQuery is a JavaScript framework designed to simplify HTML DOM tree traversal and manipulation, as well as event handling, CSS animation, and Ajax. It is free, open-source software using the permissive MIT License. As of Aug 2022, jQuery is used by 77% of the 10 million most popular websites. Web analysis indicates that it is the most widely deployed JavaScript library by a large margin, having at least 3 to 4 times more usage than any other JavaScript library.
-          <br><br><br>
-          Wikipedia Link: <a href="https://en.wikipedia.org/wiki/JQuery">https://en.wikipedia.org/wiki/JQuery</a>
-          <br><br>
-          Github Topic Link: <a href="https://github.com/topics/jquery">https://github.com/topics/jquery</a>
-        </n-card>
+        <n-sapce id="gridright">
+          <div>
+          <n-card title="jQuery" size="huge" class="card">
+            jQuery is a JavaScript framework designed to simplify HTML DOM tree traversal and manipulation, as well as event handling, CSS animation, and Ajax. It is free, open-source software using the permissive MIT License. As of Aug 2022, jQuery is used by 77% of the 10 million most popular websites. Web analysis indicates that it is the most widely deployed JavaScript library by a large margin, having at least 3 to 4 times more usage than any other JavaScript library.
+            <br><br><br>
+            Wikipedia Link: <a href="https://en.wikipedia.org/wiki/JQuery">https://en.wikipedia.org/wiki/JQuery</a>
+            <br><br>
+            Github Topic Link: <a href="https://github.com/topics/jquery">https://github.com/topics/jquery</a>
+          </n-card></div>
+          <n-image
+            width="100"
+            height="100"
+            src="../assets/legend.png"
+          />
+        </n-sapce>
       </n-grid-item>
     </n-grid>
+    <!-- <Legend></Legend> -->
     <!-- <n-layout style="height: 93vh;"> -->
-      <div class="waterfall-container" @scroll="handleScroll">
+      <!-- <div class="waterfall-container" @scroll="handleScroll"> -->
         <n-modal v-model:show="showModal">
           <n-card style="width: 600px;" :title="en ? 'What is a learning entry?' : '什么是学习入口？'" :bordered="false"
             size="huge">
@@ -69,25 +78,26 @@
           <div class="piping" ref="piping3">
           </div>
         </div> -->
-      </div>
+      <!-- </div> -->
     <!-- </n-layout> -->
   </n-layout>
 </template>
 
 <script>
-import { defineComponent, createApp, h } from 'vue'
-import SectionCard from './SectionCard'
-import store from '../store'
-import router from '../router'
+import { defineComponent, h } from 'vue'
+// import SectionCard from './SectionCard'
+// import store from '../store'
+// import router from '../router'
 import { useNotification, NAvatar } from 'naive-ui'
 import { Help as HelpIcon } from '@vicons/ionicons5'
 import { mapState } from 'vuex'
 import G6 from '@antv/g6'
 import graphdata from '@/assets/graph.json'
+// import Legend from '@/components/Legend.vue'
 
-const loadLimit = 20
-let WFmaxContentHeight = 0
-let loadingMessage = null
+// const loadLimit = 20
+// let WFmaxContentHeight = 0
+// let loadingMessage = null
 let showed = false
 
 export default defineComponent({
@@ -104,6 +114,7 @@ export default defineComponent({
   },
   components: {
     HelpIcon
+    // Legend
   },
   // async created () {
   //   const message = useMessage()
@@ -132,61 +143,6 @@ export default defineComponent({
     this.initG6()
   },
   methods: {
-    async fetchSections () {
-      const that = this
-      const limit = loadLimit
-      const url = this.loadUrl
-      const res = await this.$http.get(url,
-        {
-          params: {
-            page: this.currentPage ? this.currentPage : 0,
-            limit: limit
-          }
-        })
-      const datas = res.data.data
-      if (datas.length === 0) {
-        this.loadOver = true
-        this.currentPage--
-        return
-      }
-      datas.forEach((data, i) => {
-        const arr = [
-          that.$refs.piping0.offsetHeight,
-          that.$refs.piping1.offsetHeight,
-          that.$refs.piping2.offsetHeight,
-          that.$refs.piping3.offsetHeight
-        ]
-        const min = arr.indexOf(Math.min.apply(Math, arr))
-        const app = createApp(SectionCard, {
-          id: data.section_id,
-          apis: data.apis,
-          threadTitle: data.thread_info.Title,
-          tags: data.tags
-        }).use(store).use(router)
-        const appHost = document.createElement('div')
-        this.$refs[`piping${min}`].appendChild(appHost)
-        app.mount(appHost)
-      })
-      if (loadingMessage) {
-        loadingMessage.destroy()
-        loadingMessage = null
-      }
-      this.messageBox.success('learning entry data loaded', { duration: 500 })
-    },
-    handleScroll (e) {
-      // scrollTop + offsetHeight = scrollHeight
-      // if (this.loadOver) return
-      const scrollContainer = e.currentTarget
-      if (scrollContainer.scrollHeight > WFmaxContentHeight + 10) {
-        WFmaxContentHeight = scrollContainer.scrollHeight
-        this.loadEnabled = true
-      }
-      if (scrollContainer.scrollTop + scrollContainer.offsetHeight >= scrollContainer.scrollHeight - 10 && this.loadEnabled) {
-        this.currentPage++
-        this.loadEnabled = false
-        this.fetchSections()
-      }
-    },
     initG6 () {
       // const graphData = this.jsonGraphData
       const containerG6 = this.$refs.containerG6
@@ -323,6 +279,11 @@ export default defineComponent({
     margin-left: 80px;
     margin-right: 50px;
     width: 90%;
+}
+
+#gridright {
+  display: flex;
+  flex-direction: column;
 }
 
 #header {
