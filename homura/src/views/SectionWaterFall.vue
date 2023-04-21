@@ -28,7 +28,7 @@
         </n-card>
       </n-grid-item>
     </n-grid>
-    <n-layout style="height: 93vh;">
+    <!-- <n-layout style="height: 93vh;"> -->
       <div class="waterfall-container" @scroll="handleScroll">
         <n-modal v-model:show="showModal">
           <n-card style="width: 600px;" :title="en ? 'What is a learning entry?' : '什么是学习入口？'" :bordered="false"
@@ -59,7 +59,7 @@
                   type="info">搜索功能</n-gradient-text></router-link>来找找看和自己感兴趣主题相关的API。</p>
           </n-card>
         </n-modal>
-        <div class="waterfall-content">
+        <!-- <div class="waterfall-content">
           <div class="piping" ref="piping0">
           </div>
           <div class="piping" ref="piping1">
@@ -68,9 +68,9 @@
           </div>
           <div class="piping" ref="piping3">
           </div>
-        </div>
+        </div> -->
       </div>
-    </n-layout>
+    <!-- </n-layout> -->
   </n-layout>
 </template>
 
@@ -79,7 +79,7 @@ import { defineComponent, createApp, h } from 'vue'
 import SectionCard from './SectionCard'
 import store from '../store'
 import router from '../router'
-import { useMessage, useNotification, NAvatar } from 'naive-ui'
+import { useNotification, NAvatar } from 'naive-ui'
 import { Help as HelpIcon } from '@vicons/ionicons5'
 import { mapState } from 'vuex'
 import G6 from '@antv/g6'
@@ -105,29 +105,21 @@ export default defineComponent({
   components: {
     HelpIcon
   },
-  async created () {
-    const message = useMessage()
-    this.messageBox = message
-    loadingMessage = message.loading('loading learning entry data', { duration: 5000 })
-    await this.fetchSections()
-  },
+  // async created () {
+  //   const message = useMessage()
+  //   this.messageBox = message
+  //   loadingMessage = message.loading('loading learning entry data', { duration: 5000 })
+  //   await this.fetchSections()
+  // },
   mounted () {
     const notification = useNotification()
     if (!showed) {
       showed = true
       notification.create({
-        title: this.en ? 'Hint' : '提示',
-        description: this.en ? 'About The Learning Entries' : '有关于学习入口的说明',
-        content: this.en
-          ? `A Learning Entries is a set of APIs which we guess you may be interested in.
-  This set of APIs are frequently discussed together in the Stack Overflow (SO) Community, which means they have close relationships.
-  Through these entries, you can have a quick start and get a knowledge of how the SDK is used in the real development environment.
-  Watch detail through the left Help button :-)
-        `
-          : `学习入口是指一组我们向初学者的您推荐、您可能会乐于学习的一组API。
-我们分析了每个API在Stack Overflow中的讨论纪录，确保向您推荐的API是常用的、并且彼此之间有着紧密的联系。
-通过这些学习入口，您可以在初学阶段快速寻找您的学习目标，并得到尽可能多有关实际开发时使用API的知识。
-您可以使用左侧的"?"按钮来查看详细说明 :-)
+        title: '提示',
+        description: '关于Github层次化学习系统的说明',
+        content: `Github层次化学习系统以Wikipedia软件开发领域的层级知识图谱为基础，根据Wikipedia与Github仓库的连接，将该知识图谱延展到Github Topic所代表的知识，并结合实际的Github仓库帮助软件开发初学者进行系统性的软件开发技能学习。
+您可以点击左侧的"?"按钮以查看详细说明
         `,
         avatar: () =>
           h(NAvatar, {
@@ -286,7 +278,7 @@ export default defineComponent({
 <style>
 .waterfall-container {
   height: 100%;
-  overflow: auto;
+  /* overflow: auto; */
   display: flex;
   justify-content: center;
 }

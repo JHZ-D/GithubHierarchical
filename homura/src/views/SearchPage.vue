@@ -36,12 +36,40 @@
   </n-layout>
 </div>
     <div class="card">
-      <n-card title="jQuery" size="huge">
-        jQuery is a JavaScript framework designed to simplify HTML DOM tree traversal and manipulation, as well as event handling, CSS animation, and Ajax. It is free, open-source software using the permissive MIT License. As of Aug 2022, jQuery is used by 77% of the 10 million most popular websites. Web analysis indicates that it is the most widely deployed JavaScript library by a large margin, having at least 3 to 4 times more usage than any other JavaScript library.
+      <n-card title="搜索结果" size="huge">
+        <!-- jQuery is a JavaScript framework designed to simplify HTML DOM tree traversal and manipulation, as well as event handling, CSS animation, and Ajax. It is free, open-source software using the permissive MIT License. As of Aug 2022, jQuery is used by 77% of the 10 million most popular websites. Web analysis indicates that it is the most widely deployed JavaScript library by a large margin, having at least 3 to 4 times more usage than any other JavaScript library.
         <br><br><br>
         Wikipedia Link: <a href="https://en.wikipedia.org/wiki/JQuery">https://en.wikipedia.org/wiki/JQuery</a>
         <br><br>
-        Github Topic Link: <a href="https://github.com/topics/jquery">https://github.com/topics/jquery</a>
+        Github Topic Link: <a href="https://github.com/topics/jquery">https://github.com/topics/jquery</a> -->
+        <n-grid :x-gap="12" :y-gap="8" :cols="4">
+          <n-grid-item v-for="num in repodata.length" :key="num">
+            <a :href="'https://github.com/'+repodata[num - 1]" target="_blank">
+              <div :class="num % 2 === 0 ? 'light-green' : 'green'">{{ repodata[num - 1] }}</div>
+            </a>
+          </n-grid-item>
+          <!-- <n-grid-item>
+            <div class="green" />
+          </n-grid-item>
+          <n-grid-item>
+            <div class="light-green" />
+          </n-grid-item>
+          <n-grid-item>
+            <div class="green" />
+          </n-grid-item>
+          <n-grid-item>
+            <div class="light-green" />
+          </n-grid-item>
+          <n-grid-item>
+            <div class="green" />
+          </n-grid-item>
+          <n-grid-item>
+            <div class="light-green" />
+          </n-grid-item> -->
+          <!-- <n-grid-item>
+            <div class="green" />
+          </n-grid-item> -->
+        </n-grid>
       </n-card>
     </div>
 </n-space>
@@ -52,6 +80,8 @@ import { defineComponent } from 'vue'
 import { Search, TrashOutline, Help as HelpIcon } from '@vicons/ionicons5'
 import { mapState, mapMutations } from 'vuex'
 import MultiSearchBread from '../components/MultiSearchBread.vue'
+import repodata from '@/assets/exrepos.json'
+
 export default defineComponent({
   components: {
     Search,
@@ -65,7 +95,8 @@ export default defineComponent({
     return {
       searchValue: '',
       messageBox: undefined,
-      literal_items: []
+      literal_items: [],
+      repodata: repodata
     }
   },
   methods: {
@@ -138,7 +169,22 @@ export default defineComponent({
   margin-bottom: 20px;
   margin-left: 10%;
   margin-right: 10%;
-  margin-top: 5%;
+  margin-top: 3%;
+}
+
+.light-green {
+  height: 108px;
+  background-color: rgba(0, 128, 0, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.green {
+  height: 108px;
+  background-color: rgba(0, 128, 0, 0.24);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* #search-space {
