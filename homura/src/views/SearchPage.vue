@@ -1,78 +1,54 @@
 <template>
-  <n-space vertical size="large">
-    <div>
-  <n-layout>
-    <n-layout-header bordered id="header">
-      <n-space id="head-space" size="huge" align="baseline">
-        <n-h1>Github层次化检索系统</n-h1>
-        <n-tooltip trigger="hover">
-          <template #trigger>
-            <n-button ghost circle size="small" @click="showModal = true"><n-icon
-                size="20"><help-icon /></n-icon></n-button>
-          </template>
-          {{ en ? "What is a learning entry?" : "什么是学习入口？" }}
-        </n-tooltip>
-      </n-space>
-    </n-layout-header>
-    <n-layout-content>
-      <div id="search-container">
-        <MultiSearchBread ></MultiSearchBread>
-        <div id="search-space">
-        <n-auto-complete
-            id="search-input"
-            :options="searchOptions"
-            v-model:value="searchValue"
-            size="large"
-            placeholder="搜索仓库"
-        />
-        <n-button circle @click="onSearchClick">
-            <template #icon>
-            <n-icon><Search /></n-icon>
-            </template>
-        </n-button>
-        </div>
+  <div class="search-page">
+    <n-space vertical size="large">
+      <div>
+        <n-layout>
+          <n-layout-header bordered id="header" style="background-color: rgba(118, 190, 204,0.9);">
+            <n-space id="head-space" size="huge" align="baseline">
+              <n-h1>Github层次化检索系统</n-h1>
+                <n-tooltip trigger="hover">
+                  <template #trigger>
+                    <n-button ghost circle size="small" @click="showModal = true"><n-icon
+                    size="20"><help-icon /></n-icon></n-button>
+                  </template>
+                  帮助
+                </n-tooltip>
+            </n-space>
+          </n-layout-header>
+          <n-layout-content class="headerasearch" style="background-color: rgba(144, 215, 236,0.7);">
+            <div id="search-container">
+              <MultiSearchBread ></MultiSearchBread>
+              <div id="search-space">
+                <n-auto-complete
+                    id="search-input"
+                    :options="searchOptions"
+                    v-model:value="searchValue"
+                    size="large"
+                    placeholder="搜索仓库"
+                />
+                <n-button circle @click="onSearchClick">
+                  <template #icon>
+                    <n-icon><Search /></n-icon>
+                  </template>
+                </n-button>
+              </div>
+            </div>
+          </n-layout-content>
+        </n-layout>
       </div>
-    </n-layout-content>
-  </n-layout>
-</div>
-    <div class="card">
-      <n-card title="搜索结果" size="huge">
-        <!-- jQuery is a JavaScript framework designed to simplify HTML DOM tree traversal and manipulation, as well as event handling, CSS animation, and Ajax. It is free, open-source software using the permissive MIT License. As of Aug 2022, jQuery is used by 77% of the 10 million most popular websites. Web analysis indicates that it is the most widely deployed JavaScript library by a large margin, having at least 3 to 4 times more usage than any other JavaScript library.
-        <br><br><br>
-        Wikipedia Link: <a href="https://en.wikipedia.org/wiki/JQuery">https://en.wikipedia.org/wiki/JQuery</a>
-        <br><br>
-        Github Topic Link: <a href="https://github.com/topics/jquery">https://github.com/topics/jquery</a> -->
-        <n-grid :x-gap="12" :y-gap="8" :cols="4">
-          <n-grid-item v-for="num in repodata.length" :key="num">
-            <a :href="'https://github.com/'+repodata[num - 1]" target="_blank">
-              <div :class="num % 2 === 0 ? 'light-green' : 'green'">{{ repodata[num - 1] }}</div>
-            </a>
-          </n-grid-item>
-          <!-- <n-grid-item>
-            <div class="green" />
-          </n-grid-item>
-          <n-grid-item>
-            <div class="light-green" />
-          </n-grid-item>
-          <n-grid-item>
-            <div class="green" />
-          </n-grid-item>
-          <n-grid-item>
-            <div class="light-green" />
-          </n-grid-item>
-          <n-grid-item>
-            <div class="green" />
-          </n-grid-item>
-          <n-grid-item>
-            <div class="light-green" />
-          </n-grid-item> -->
-          <!-- <n-grid-item>
-            <div class="green" />
-          </n-grid-item> -->
-        </n-grid>
-      </n-card>
-    </div>
-</n-space>
+      <div class="card">
+        <n-card title="搜索结果" size="huge" style="background-color:rgba(255, 255, 255,0.2);">
+          <n-grid :x-gap="12" :y-gap="8" :cols="4">
+            <n-grid-item v-for="num in repodata.length" :key="num">
+              <a :href="'https://github.com/'+repodata[num - 1]" target="_blank">
+                <div :class="num % 2 === 0 ? 'light-green' : 'green'">{{ repodata[num - 1] }}</div>
+              </a>
+            </n-grid-item>
+          </n-grid>
+        </n-card>
+      </div>
+    </n-space>
+  </div>
 </template>
 
 <script>
@@ -156,7 +132,8 @@ export default defineComponent({
     justify-content: center;
     align-items: center;
     align-content: space-between;
-
+    margin-top: 20px;
+    margin-bottom: 5px;
     /* width: 50%; */
 }
 
@@ -169,7 +146,9 @@ export default defineComponent({
   margin-bottom: 20px;
   margin-left: 10%;
   margin-right: 10%;
-  margin-top: 3%;
+  margin-top: 2%;
+  /* background-color: blueviolet;
+  color: aquamarine; */
 }
 
 .light-green {
@@ -195,4 +174,16 @@ export default defineComponent({
     height: 100%;
     background-size: cover;
 } */
+
+.search-page {
+  background: url("../assets/backgd.jpg");
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+}
+
+.headerasearch {
+  background-color:rgba(220,38,38,0.2);
+  /* margin-top: -10px; */
+}
 </style>

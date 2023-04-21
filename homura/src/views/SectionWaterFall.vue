@@ -8,64 +8,52 @@
             <n-button ghost circle size="small" @click="showModal = true"><n-icon
                 size="20"><help-icon /></n-icon></n-button>
           </template>
-          {{ en ? "What is a learning entry?" : "什么是学习入口？" }}
+          帮助
         </n-tooltip>
       </n-space>
     </n-layout-header>
     <n-grid :cols="2" :rows="1" :col-gap="32" :row-gap="16" class="grid">
       <n-grid-item span="1">
-        <div>
-          <div class="g6-x" id="containerG6" ref="containerG6"></div>
-        </div>
+        <!-- <div> -->
+          <div class="g6-x" id="containerG6" ref="containerG6"><img id="image" src="../assets/legend.png" width="500" /></div>
+        <!-- </div> -->
       </n-grid-item>
       <n-grid-item span="1">
-        <n-sapce id="gridright">
-          <div>
-          <n-card title="jQuery" size="huge" class="card">
-            jQuery is a JavaScript framework designed to simplify HTML DOM tree traversal and manipulation, as well as event handling, CSS animation, and Ajax. It is free, open-source software using the permissive MIT License. As of Aug 2022, jQuery is used by 77% of the 10 million most popular websites. Web analysis indicates that it is the most widely deployed JavaScript library by a large margin, having at least 3 to 4 times more usage than any other JavaScript library.
-            <br><br><br>
-            Wikipedia Link: <a href="https://en.wikipedia.org/wiki/JQuery">https://en.wikipedia.org/wiki/JQuery</a>
-            <br><br>
-            Github Topic Link: <a href="https://github.com/topics/jquery">https://github.com/topics/jquery</a>
-          </n-card></div>
-          <n-image
+        <n-grid :cols="1" :rows="2" :row-gap="16" class="grid">
+        <!-- <n-sapce id="gridright"> -->
+          <n-grid-item span="1">
+            <n-card title="jQuery" size="huge" class="card">
+              jQuery is a JavaScript framework designed to simplify HTML DOM tree traversal and manipulation, as well as event handling, CSS animation, and Ajax. It is free, open-source software using the permissive MIT License. As of Aug 2022, jQuery is used by 77% of the 10 million most popular websites. Web analysis indicates that it is the most widely deployed JavaScript library by a large margin, having at least 3 to 4 times more usage than any other JavaScript library.
+              <br><br><br>
+              Wikipedia Link: <a href="https://en.wikipedia.org/wiki/JQuery">https://en.wikipedia.org/wiki/JQuery</a>
+              <br><br>
+              Github Topic Link: <a href="https://github.com/topics/jquery">https://github.com/topics/jquery</a>
+            </n-card>
+          </n-grid-item>
+          <n-grid-item span="1">
+          <!-- <n-image
             width="100"
-            height="100"
             src="../assets/legend.png"
-          />
-        </n-sapce>
+          />图片 -->
+        </n-grid-item>
+        </n-grid>
+        <!-- </n-sapce> -->
       </n-grid-item>
     </n-grid>
     <!-- <Legend></Legend> -->
     <!-- <n-layout style="height: 93vh;"> -->
       <!-- <div class="waterfall-container" @scroll="handleScroll"> -->
         <n-modal v-model:show="showModal">
-          <n-card style="width: 600px;" :title="en ? 'What is a learning entry?' : '什么是学习入口？'" :bordered="false"
+          <n-card style="width: 600px;" title="如何使用" :bordered="false"
             size="huge">
-            <p v-if="en">A learning entry is a set of APIs which we guess you may be interested in <n-gradient-text
-                type="danger"> :) </n-gradient-text> This set of APIs are frequently discussed together in the
-              <n-gradient-text type="danger"> Stack Overflow (SO) </n-gradient-text> due to our analysis on SO
-            </p>
-            <p v-else>一个学习入口是指一组我们推荐给您学习的java API<n-gradient-text type="danger"> :-) </n-gradient-text>
-              我们通过分析<n-gradient-text type="danger"> Stack Overflow (SO)
-              </n-gradient-text>中关于API的讨论纪录为您推荐这些API，确保一组学习入口中的API是常用的、且彼此之间有着密切关系（经常被拿来在一起讨论）的。</p>
-            <p v-if="en">If you are a start learner, who don't know where to start learning this <n-gradient-text
-                type="danger">HUGE AMOUNT</n-gradient-text> of APIS. You can view these learning entries as your please
-              and find a learning entry to start viewing these APIs</p>
-            <p v-else>如果您是个java初学者，面对javadoc中数量庞大的API、不知道从哪开始学起，您可以尝试看看这些学习入口中为您推荐的API</p>
-            <p v-if="en">However, viewing API names may not give you a deep impression about what these APIs are exactly
-              talking about. Therefore, we append every learning entry a set of <n-gradient-text type="danger">popular
-                questions</n-gradient-text> from SO that talk about these APIs, which could give you a better view.
-              Hopeing these popular questions can help you find your interest better :)</p>
-            <p v-else>为了让初学者也能一眼就看出来每个学习入口中的API主要是干什么用的，我们为每个学习入口打上了<n-gradient-text
-                type="danger">主题标签</n-gradient-text>、来展示和这组API最相关的一些主题词汇，同时也附加了一个在SO社区中对这些API进行讨论的颇具代表性的问题。希望能够帮您快速开始 :-)
-            </p>
-            <n-gradient-text :size="24" type="danger">{{ en ? "BE AWARE" : "注意事项" }}</n-gradient-text>
-            <p v-if="en">If you are an experienced developer about this SDK, you may refer to the <n-gradient-text
-                type="danger">search feature</n-gradient-text> we provided in <router-link class="link"
-                to="/roadmap"><n-gradient-text type="info">here</n-gradient-text></router-link>.</p>
-            <p v-else>如果您觉得这些API您都会的不行，您可能已经是个有点基础的学习者了，您可以尝试我们提供的<router-link class="link" to="/roadmap"><n-gradient-text
-                  type="info">搜索功能</n-gradient-text></router-link>来找找看和自己感兴趣主题相关的API。</p>
+            <p>下图是本系统提供的基于Wikipedia和Github的软件开发领域知识图的一部分。通过之前的搜索或点击，您来到了黄圈所代表的知识点所在位置。</p>
+            <p>图中的每个椭圆代表一个Wikipedia软件开发领域的知识，每个圆代表一个Github Topic所代表的知识。本系统将它们联系起来，体现在一张图中。</p>
+            <p>您可以在下图中选择与本知识点相关的其他知识点跳转到相应页面进行学习。</p>
+            <p>知识图右方的卡片提供了本知识点的简要介绍，并提供了相应的Wikipedia或Github链接，您也可以通过链接跳转到对应网站进行详细学习。</p>
+            <!-- <n-gradient-text :size="18">注意事项</n-gradient-text> -->
+            <br/><p style="font-size: medium;">注意事项</p>
+            <p>如果您对这些概念都掌握得比较好，您可以尝试我们提供的<router-link class="link" to="/search"><n-gradient-text
+                  type="info">搜索功能</n-gradient-text></router-link>来寻找与自己感兴趣主题相关的Github仓库。</p>
           </n-card>
         </n-modal>
         <!-- <div class="waterfall-content">
@@ -277,13 +265,21 @@ export default defineComponent({
 .grid {
     margin-top: 50px;
     margin-left: 80px;
-    margin-right: 50px;
+    margin-right: 30px;
     width: 90%;
 }
 
 #gridright {
   display: flex;
   flex-direction: column;
+}
+
+#image {
+  /* margin-left: 80px; */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* transform: translate(0, -100%); */
 }
 
 #header {
@@ -294,4 +290,7 @@ export default defineComponent({
   align-items: left;
   padding-top: 40px;
   padding-left: 55px;
+  padding-bottom: 20px;
+  background-color:rgba(242, 234, 218,0.7);
+  color: #afdfe4;
 }</style>
