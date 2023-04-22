@@ -15,7 +15,7 @@
     <n-grid :cols="2" :rows="1" :col-gap="32" :row-gap="16" class="grid">
       <n-grid-item span="1">
         <!-- <div> -->
-          <div class="g6-x" id="containerG6" ref="containerG6"><img id="image" src="../assets/legend.png" width="500" /></div>
+          <div class="g6-x" id="containerG6" ref="containerG6"><img id="image" src="../assets/legend.png" width="200" /></div>
         <!-- </div> -->
       </n-grid-item>
       <n-grid-item span="1">
@@ -255,6 +255,7 @@ export default defineComponent({
 
 .g6-x {
   /* width: 800px; */
+  position: relative;
   width: 80%;
   height: 800px;
   box-sizing: border-box;
@@ -277,8 +278,9 @@ export default defineComponent({
 #image {
   /* margin-left: 80px; */
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 0;
+  right: 0;
+  opacity: 0.5;
   /* transform: translate(0, -100%); */
 }
 
