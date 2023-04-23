@@ -35,11 +35,11 @@
       <p class="home-p">{{en?"":"可以用任何你想到的词来"}}<router-link class="link" to="/search"><n-gradient-text type="info">{{en?"Search APIs":"搜索API"}}</n-gradient-text></router-link>{{en?" you're interested in":""}}</p> -->
       <h2 class="home-p">基于Wikipedia软件开发领域的层级知识图谱</h2>
       <h2 class="home-p">和Github Topic的层次结构的Github层次化学习与检索服务</h2>
-      <div id="search-container">
+      <div id="search-container" style="width: fit-content; margin: 100px auto;">
         <n-dropdown @select="handleSearchSelect" trigger="click" :options="searchTypeOptions">
           <n-button :keyboard="false" id="search-choose">{{repo?"搜索仓库":"搜索知识点"}}</n-button>
         </n-dropdown>
-        <MultiSearchBread v-if="repo" style="order: 2;"></MultiSearchBread>
+        <MultiSearchBread v-if="repo" style="order: 2; background-color: rgba(252, 241, 110, 0.7); padding: 10.333px 0; border-top:1px solid rgba(224, 224, 224, 1); border-bottom:1px solid rgba(224, 224, 224, 1)"></MultiSearchBread>
         <div id="search-space">
           <n-auto-complete
             id="search-input"

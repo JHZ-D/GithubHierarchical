@@ -13,19 +13,19 @@
         </n-tooltip>
       </n-space>
     </n-layout-header>
-    <n-grid :cols="4" :rows="1" :col-gap="32" :row-gap="16" class="grid">
-      <n-grid-item span="3">
+    <n-grid :cols="7" :rows="1" :col-gap="32" :row-gap="16" class="grid">
+      <n-grid-item span="5">
           <div class="g6-x" id="containerG6" ref="containerG6"><img id="image" src="../assets/legendnew.gif" width="200" /></div>
       </n-grid-item>
-      <n-grid-item span="1">
+      <n-grid-item span="2">
         <n-grid :cols="1" :rows="2" :row-gap="16" class="mygrid">
           <n-grid-item span="1">
             <n-card title="jQuery" size="huge" class="mycard">
               jQuery is a JavaScript framework designed to simplify HTML DOM tree traversal and manipulation, as well as event handling, CSS animation, and Ajax. It is free, open-source software using the permissive MIT License. As of Aug 2022, jQuery is used by 77% of the 10 million most popular websites. Web analysis indicates that it is the most widely deployed JavaScript library by a large margin, having at least 3 to 4 times more usage than any other JavaScript library.
               <br><br><br>
-              Wikipedia Link: <a href="https://en.wikipedia.org/wiki/JQuery">https://en.wikipedia.org/wiki/JQuery</a>
+              Wikipedia Link: <a href="https://en.wikipedia.org/wiki/JQuery" target="_blank">https://en.wikipedia.org/wiki/JQuery</a>
               <br><br>
-              Github Topic Link: <a href="https://github.com/topics/jquery">https://github.com/topics/jquery</a>
+              Github Topic Link: <a href="https://github.com/topics/jquery" target="_blank">https://github.com/topics/jquery</a>
             </n-card>
           </n-grid-item>
           <n-grid-item span="1">
@@ -300,7 +300,7 @@ export default defineComponent({
 .g6-x {
   /* width: 800px; */
   position: relative;
-  width: 80%;
+  width: 90%;
   /* height: 800px; */
   box-sizing: border-box;
   border: 1px solid #ccc;

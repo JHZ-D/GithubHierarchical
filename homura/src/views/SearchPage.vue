@@ -47,7 +47,7 @@
           </n-grid>
         </n-card>
       </div> -->
-  <n-data-table style="height: 500px; width: 1500px; margin: 50px auto; --td-padding: 15px; --th-padding: 17px" :columns="columns" :data="repodata" :pagination="pagination" flex-height />
+  <n-data-table style="height: 500px; width: 1200px; margin: 50px auto; --td-padding: 10px; --th-padding: 11px" :columns="columns" :data="repodata" :pagination="pagination" flex-height />
     </n-space>
   </div>
 </template>
@@ -66,7 +66,7 @@ import repodata from '@/assets/exrepos.json'
 const columns = [
   {
     title: 'Repository',
-    width: 400,
+    width: 350,
     key: 'reponame',
     render (row, index) {
       return h('a', { href: 'https://github.com/' + row.reponame, target: '_blank' }, row.reponame) // <a href="'https://github.com/'+repodata[index - 1]" target="_blank">{{ repodata[num - 1] }}</a>
@@ -74,7 +74,7 @@ const columns = [
   },
   {
     title: 'Description',
-    width: 1000,
+    width: 840,
     key: 'description'
   }
 ]

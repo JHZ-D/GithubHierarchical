@@ -1,4 +1,5 @@
 <template>
+    <div style="padding: auto">
     <n-breadcrumb class="breadcrumb">
       <n-breadcrumb-item class="breadcrumbitem" v-for="num in chooseArray.length" :key="num">
         <!-- {{ objArr[num-1] }} -->
@@ -17,7 +18,7 @@
           </div>
         </n-dropdown>
       </n-breadcrumb-item> -->
-    </n-breadcrumb>
+    </n-breadcrumb></div>
   </template>
 
 <script>
@@ -197,12 +198,14 @@ export default defineComponent({
     margin: -4px;
     /* height: 40px; */
     border-radius: inherit;
+    /* background-color: rgba(255, 255, 255, 0.4); */
   }
 
   .breadcrumb {
     /* margin: 0; */
     display: flex;
     /* height: 40px; */
+    padding: auto;
     /* flex-direction: row; */
     /* background-color: rgba(255, 255, 255, 0.4); */
   }
@@ -210,5 +213,6 @@ export default defineComponent({
   .breadcrumbitem {
     display: flex;
     /* flex-direction: row; */
+    color: crimson;
   }
   </style>
