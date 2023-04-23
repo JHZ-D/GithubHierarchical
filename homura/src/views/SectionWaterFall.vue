@@ -1,5 +1,6 @@
 <template>
-  <n-layout>
+  <div id="SectionWhole">
+  <n-layout style="background-color: rgba(255, 255, 255, 0);">
     <n-layout-header bordered id="header">
       <n-space id="head-space" size="huge" align="baseline">
         <n-h1>Github层次化学习系统</n-h1>
@@ -61,6 +62,7 @@
       <!-- </div> -->
     <!-- </n-layout> -->
   </n-layout>
+</div>
 </template>
 
 <script>
@@ -160,6 +162,7 @@ export default defineComponent({
         container: containerG6,
         // width: 800,
         height: 650,
+        fitView: true,
         modes: {
           default: ['drag-canvas', 'zoom-canvas']
         },
@@ -255,6 +258,7 @@ export default defineComponent({
   box-sizing: border-box;
   border: 1px solid #ccc;
   margin-left: 20px;
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
 .grid {
@@ -262,6 +266,7 @@ export default defineComponent({
     margin-left: 80px;
     margin-right: 30px;
     width: 90%;
+    background-color: rgba(255, 255, 255, 0);
 }
 
 #gridright {
@@ -276,6 +281,15 @@ export default defineComponent({
   right: 0;
   opacity: 0.5;
   /* transform: translate(0, -100%); */
+}
+
+#SectionWhole {
+  background-image: url('../assets/backgd.jpg');
+  background-size: cover;
+  background-attachment:fixed;
+  width: 100%;
+  height: 100%;
+  background-color:#cccccc;
 }
 
 #header {
