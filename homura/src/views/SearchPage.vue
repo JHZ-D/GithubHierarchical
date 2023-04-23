@@ -36,7 +36,7 @@
             </div>
           <!-- </n-layout-content> -->
       </div>
-      <div class="card">
+      <!-- <div class="card">
         <n-card title="搜索结果" size="huge" style="background-color:rgba(255, 255, 255,0.2);">
           <n-grid :x-gap="12" :y-gap="8" :cols="4">
             <n-grid-item v-for="num in repodata.length" :key="num">
@@ -46,17 +46,59 @@
             </n-grid-item>
           </n-grid>
         </n-card>
-      </div>
+      </div> -->
+      <!-- <n-table :single-line="false">
+    <thead>
+      <tr>
+        <th>Repository</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="num in ">
+        <td>放弃</td>
+        <td>反常的</td>
+        <td>彻底废除</td>
+        <td>...</td>
+        <td>干！我刚才背的是啥</td>
+      </tr>
+      <tr>
+        <td>...</td>
+        <td>...</td>
+        <td>...</td>
+        <td>...</td>
+        <td>...</td>
+      </tr>
+    </tbody>
+  </n-table> -->
+  <n-data-table style="height: 500px; width: 1500px; margin: 50px auto; --td-padding: 15px; --th-padding: 17px" :columns="columns" :data="repodata" :pagination="pagination" flex-height />
     </n-space>
   </div>
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent, reactive } from 'vue'
 import { Search, TrashOutline, Help as HelpIcon } from '@vicons/ionicons5'
 import { mapState, mapMutations } from 'vuex'
 import MultiSearchBread from '../components/MultiSearchBread.vue'
 import repodata from '@/assets/exrepos.json'
+
+// const tableData = Array.from(repodata).map((item, index) => ({
+//   key: index,
+//   reponame: item
+// }))
+const columns = [
+  {
+    title: 'Repository',
+    width: 400,
+    key: 'reponame'
+  },
+  {
+    title: 'Description',
+    width: 1000,
+    key: 'description'
+  }
+]
 
 export default defineComponent({
   components: {
@@ -73,6 +115,25 @@ export default defineComponent({
       messageBox: undefined,
       literal_items: [],
       repodata: repodata
+    }
+  },
+  setup () {
+    const paginationReactive = reactive({
+      page: 1,
+      pageSize: 10,
+      // showSizePicker: true,
+      // pageSizes: [3, 5, 7],
+      onChange: (page) => {
+        paginationReactive.page = page
+      },
+      onUpdatePageSize: (pageSize) => {
+        paginationReactive.pageSize = pageSize
+        paginationReactive.page = 1
+      }
+    })
+    return {
+      columns,
+      pagination: paginationReactive
     }
   },
   methods: {
