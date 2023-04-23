@@ -1,7 +1,7 @@
 <template>
   <div class="search-page">
-    <n-space vertical size="large">
-      <div>
+    <n-space vertical size="large" class="space-back">
+      <div style="background-color: rgba(255, 255, 255, 0.1);">
         <n-layout>
           <n-layout-header bordered id="header" style="background-color: rgba(118, 190, 204,0.9);">
             <n-space id="head-space" size="huge" align="baseline">
@@ -15,7 +15,8 @@
                 </n-tooltip>
             </n-space>
           </n-layout-header>
-          <n-layout-content class="headerasearch" style="background-color: rgba(144, 215, 236,0.7);">
+        </n-layout>
+          <!-- <n-layout-content class="headerasearch" style="background-color: rgba(144, 215, 236,0.7);"> -->
             <div id="search-container">
               <MultiSearchBread ></MultiSearchBread>
               <div id="search-space">
@@ -33,8 +34,7 @@
                 </n-button>
               </div>
             </div>
-          </n-layout-content>
-        </n-layout>
+          <!-- </n-layout-content> -->
       </div>
       <div class="card">
         <n-card title="搜索结果" size="huge" style="background-color:rgba(255, 255, 255,0.2);">
@@ -137,10 +137,15 @@ export default defineComponent({
     /* width: 50%; */
 }
 
+#head-space{
+  height:50px !important;
+  margin-top: 0 !important;
+}
 .card {
   padding: 10px;
   word-break: break-all;
   width: 80%;
+  height: 80%;
   border-radius: 5px;
   box-shadow: 0px 0px 5px #888888;
   margin-bottom: 20px;
@@ -152,14 +157,14 @@ export default defineComponent({
 }
 
 .light-green {
-  height: 108px;
+  height: 90px;
   background-color: rgba(0, 128, 0, 0.12);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .green {
-  height: 108px;
+  height: 90px;
   background-color: rgba(0, 128, 0, 0.24);
   display: flex;
   align-items: center;
@@ -180,6 +185,14 @@ export default defineComponent({
   width: 100%;
   height: 100%;
   background-size: cover;
+  background-attachment:fixed;
+}
+
+.space-back {
+  background: url("../assets/backgd.jpg");
+  background-size: cover;
+  background-attachment:fixed;
+  margin-bottom: 0;
 }
 
 .headerasearch {

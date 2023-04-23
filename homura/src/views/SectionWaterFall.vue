@@ -14,15 +14,12 @@
     </n-layout-header>
     <n-grid :cols="2" :rows="1" :col-gap="32" :row-gap="16" class="grid">
       <n-grid-item span="1">
-        <!-- <div> -->
           <div class="g6-x" id="containerG6" ref="containerG6"><img id="image" src="../assets/legend.png" width="200" /></div>
-        <!-- </div> -->
       </n-grid-item>
       <n-grid-item span="1">
         <n-grid :cols="1" :rows="2" :row-gap="16" class="grid">
-        <!-- <n-sapce id="gridright"> -->
           <n-grid-item span="1">
-            <n-card title="jQuery" size="huge" class="card">
+            <n-card title="jQuery" size="huge" class="mycard">
               jQuery is a JavaScript framework designed to simplify HTML DOM tree traversal and manipulation, as well as event handling, CSS animation, and Ajax. It is free, open-source software using the permissive MIT License. As of Aug 2022, jQuery is used by 77% of the 10 million most popular websites. Web analysis indicates that it is the most widely deployed JavaScript library by a large margin, having at least 3 to 4 times more usage than any other JavaScript library.
               <br><br><br>
               Wikipedia Link: <a href="https://en.wikipedia.org/wiki/JQuery">https://en.wikipedia.org/wiki/JQuery</a>
@@ -31,13 +28,8 @@
             </n-card>
           </n-grid-item>
           <n-grid-item span="1">
-          <!-- <n-image
-            width="100"
-            src="../assets/legend.png"
-          />图片 -->
         </n-grid-item>
         </n-grid>
-        <!-- </n-sapce> -->
       </n-grid-item>
     </n-grid>
     <!-- <Legend></Legend> -->
@@ -167,7 +159,7 @@ export default defineComponent({
       this.graph = new G6.Graph({
         container: containerG6,
         // width: 800,
-        height: 800,
+        height: 650,
         modes: {
           default: ['drag-canvas', 'zoom-canvas']
         },
@@ -199,8 +191,8 @@ export default defineComponent({
         layout: {
           type: 'dagre',
           rankdir: 'TB',
-          nodesep: 30,
-          ranksep: 30
+          nodesep: 25,
+          ranksep: 25
         }
       })
       this.graph.data(this.jsonGraphData)
@@ -240,13 +232,15 @@ export default defineComponent({
   padding-bottom: 0px;
 }
 
-.card {
+.mycard {
   padding: 10px;
   word-break: break-all;
   width: 290px;
   border-radius: 5px;
   box-shadow: 0px 0px 5px #888888;
   margin-bottom: 20px;
+  /* margin-right: 20px; */
+  margin-left: 0;
 }
 
 .section-id {
@@ -257,7 +251,7 @@ export default defineComponent({
   /* width: 800px; */
   position: relative;
   width: 80%;
-  height: 800px;
+  /* height: 800px; */
   box-sizing: border-box;
   border: 1px solid #ccc;
   margin-left: 20px;
@@ -290,7 +284,7 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   align-items: left;
-  padding-top: 40px;
+  padding-top: 20px;
   padding-left: 55px;
   padding-bottom: 20px;
   background-color:rgba(242, 234, 218,0.7);

@@ -148,7 +148,7 @@ export default defineComponent({
 #search-space {
   display: flex;
   justify-content: center;
-  margin: 20px;
+  /* margin: 20px; */
 }
 
 #search-input {
