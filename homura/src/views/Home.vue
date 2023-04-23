@@ -39,7 +39,7 @@
         <n-dropdown @select="handleSearchSelect" trigger="click" :options="searchTypeOptions">
           <n-button :keyboard="false" id="search-choose">{{repo?"搜索仓库":"搜索知识点"}}</n-button>
         </n-dropdown>
-        <MultiSearchBread v-if="repo" style="order: 2; background-color: rgba(252, 241, 110, 0.7); padding: 10.333px 0; border-top:1px solid rgba(224, 224, 224, 1); border-bottom:1px solid rgba(224, 224, 224, 1)"></MultiSearchBread>
+        <MultiSearchBread v-if="repo" style="order: 2; background-color: rgba(240, 248, 255, 0.7); padding: 10.333px 0; border-top:1px solid rgba(224, 224, 224, 1); border-bottom:1px solid rgba(224, 224, 224, 1)"></MultiSearchBread>
         <div id="search-space">
           <n-auto-complete
             id="search-input"
@@ -324,7 +324,7 @@ export default defineComponent({
   order: 1; /* move it to the right */
   width: 100px;
   height: 40px;
-  background-color: aliceblue;
+  background-color: rgb(240, 248, 255);
   /* color: red; */
 }
 

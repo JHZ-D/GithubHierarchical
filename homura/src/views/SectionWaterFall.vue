@@ -43,6 +43,7 @@
             <p>图中的每个椭圆代表一个Wikipedia软件开发领域的知识，每个圆代表一个Github Topic所代表的知识。本系统将它们联系起来，体现在一张图中。</p>
             <p>您可以在下图中选择与本知识点相关的其他知识点跳转到相应页面进行学习。</p>
             <p>知识图右方的卡片提供了本知识点的简要介绍，并提供了相应的Wikipedia或Github链接，您也可以通过链接跳转到对应网站进行详细学习。</p>
+            <p>通过点击Github仓库所对应的节点，您可以得到该仓库所依赖的仓库根据相关知识点层次分类结果的可视化展示，从而体会该知识点的知识结构。</p>
             <!-- <n-gradient-text :size="18">注意事项</n-gradient-text> -->
             <br/><p style="font-size: medium;">注意事项</p>
             <p>如果您对这些概念都掌握得比较好，您可以尝试我们提供的<router-link class="link" to="/search"><n-gradient-text

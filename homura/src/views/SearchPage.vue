@@ -50,6 +50,13 @@
   <n-data-table style="height: 500px; width: 1200px; margin: 50px auto; --td-padding: 10px; --th-padding: 11px" :columns="columns" :data="repodata" :pagination="pagination" flex-height />
     </n-space>
   </div>
+  <n-modal v-model:show="showModal">
+          <n-card style="width: 600px;" title="如何使用" :bordered="false"
+            size="huge">
+            <p>您可以在搜索框左侧逐层选择与自己感兴趣内容最相关的topic，从而逐步发掘自己的需求。</p>
+            <p>选定topic后，在搜索框中输入想要搜索的内容，点击搜索按钮，就可以得到相关topic下的有关仓库。</p>
+          </n-card>
+        </n-modal>
 </template>
 
 <script>
@@ -93,6 +100,7 @@ export default defineComponent({
       searchValue: '',
       messageBox: undefined,
       literal_items: [],
+      showModal: false,
       repodata: repodata
     }
   },
