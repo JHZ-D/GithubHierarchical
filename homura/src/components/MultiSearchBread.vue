@@ -195,13 +195,16 @@ export default defineComponent({
   .trigger {
     padding: 4px;
     margin: -4px;
+    /* height: 40px; */
     border-radius: inherit;
   }
 
   .breadcrumb {
     /* margin: 0; */
     display: flex;
+    /* height: 40px; */
     /* flex-direction: row; */
+    /* background-color: rgba(255, 255, 255, 0.4); */
   }
 
   .breadcrumbitem {

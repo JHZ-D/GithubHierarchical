@@ -12,7 +12,7 @@
       </template>
       联系我们
     </n-tooltip>
-        <a href="https://github.com/JHZ-D/Wikipedia-graph-constructor">
+        <a href="https://github.com/JHZ-D/Wikipedia-graph-constructor" target="_blank">
     <n-tooltip trigger="hover">
       <template #trigger>
           <n-button ghost circle size="large" id="home-source-btn"><n-icon size="30"><SourceIcon/></n-icon></n-button>
@@ -39,13 +39,14 @@
         <n-dropdown @select="handleSearchSelect" trigger="click" :options="searchTypeOptions">
           <n-button :keyboard="false" id="search-choose">{{repo?"搜索仓库":"搜索知识点"}}</n-button>
         </n-dropdown>
+        <MultiSearchBread v-if="repo" style="order: 2;"></MultiSearchBread>
         <div id="search-space">
           <n-auto-complete
             id="search-input"
             :options="searchOptions"
             v-model:value="searchValue"
             size="large"
-            placeholder="输入知识点，如Software development, Java, Spring, vue..."
+            :placeholder="repo?'输入仓库':'输入知识点，如Software development, Java, Spring, vue...'"
           />
           <n-button circle @click="onSearchClick">
             <template #icon>
@@ -132,6 +133,7 @@
 import { defineComponent } from 'vue'
 import { mapState, mapMutations } from 'vuex'
 import { Help as HelpIcon, SearchOutline as SearchIcon, Mail as MailIcon, LogoGithub as SourceIcon } from '@vicons/ionicons5'
+import MultiSearchBread from '../components/MultiSearchBread.vue'
 
 // let showed = false
 
@@ -141,7 +143,8 @@ export default defineComponent({
     HelpIcon,
     SearchIcon,
     MailIcon,
-    SourceIcon
+    SourceIcon,
+    MultiSearchBread
   },
   data () {
     return {
@@ -263,7 +266,7 @@ export default defineComponent({
 #search-space {
   /* display: flex;
   justify-content: center; */
-  order: 2; /* move it to the left */
+  order: 3; /* move it to the left */
 }
 
 #search-input {
@@ -331,6 +334,7 @@ export default defineComponent({
   justify-content: center; /* center the items along the main axis */
   align-items: center; /* center the items along the cross axis */
   margin-top: 100px; /* add 50 pixels of space above the element */
+  /* background-color: rgba(255, 255, 255, 0.5); */
 }
 
 /* #confirm-button {

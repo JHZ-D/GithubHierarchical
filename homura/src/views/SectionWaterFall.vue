@@ -13,12 +13,12 @@
         </n-tooltip>
       </n-space>
     </n-layout-header>
-    <n-grid :cols="2" :rows="1" :col-gap="32" :row-gap="16" class="grid">
-      <n-grid-item span="1">
-          <div class="g6-x" id="containerG6" ref="containerG6"><img id="image" src="../assets/legend.png" width="200" /></div>
+    <n-grid :cols="4" :rows="1" :col-gap="32" :row-gap="16" class="grid">
+      <n-grid-item span="3">
+          <div class="g6-x" id="containerG6" ref="containerG6"><img id="image" src="../assets/legendnew.gif" width="200" /></div>
       </n-grid-item>
       <n-grid-item span="1">
-        <n-grid :cols="1" :rows="2" :row-gap="16" class="grid">
+        <n-grid :cols="1" :rows="2" :row-gap="16" class="mygrid">
           <n-grid-item span="1">
             <n-card title="jQuery" size="huge" class="mycard">
               jQuery is a JavaScript framework designed to simplify HTML DOM tree traversal and manipulation, as well as event handling, CSS animation, and Ajax. It is free, open-source software using the permissive MIT License. As of Aug 2022, jQuery is used by 77% of the 10 million most popular websites. Web analysis indicates that it is the most widely deployed JavaScript library by a large margin, having at least 3 to 4 times more usage than any other JavaScript library.
@@ -75,6 +75,7 @@ import { Help as HelpIcon } from '@vicons/ionicons5'
 import { mapState } from 'vuex'
 import G6 from '@antv/g6'
 import graphdata from '@/assets/graph.json'
+import repographdata from '@/assets/repograph.json'
 // import Legend from '@/components/Legend.vue'
 
 // const loadLimit = 20
@@ -91,7 +92,8 @@ export default defineComponent({
       messageBox: undefined,
       showModal: false,
       jsonGraphData: graphdata,
-      graph: null
+      graph: null,
+      repographdata: repographdata
     }
   },
   components: {
@@ -123,6 +125,50 @@ export default defineComponent({
       })
     }
     this.initG6()
+    const rnodes = this.repographdata.nodes
+    const redges = this.repographdata.edges
+    rnodes.forEach(node => {
+      if (!node.style) {
+        node.style = {}
+      }
+      switch (node.type) {
+        case 'rect': {
+          node.size = [130, 40]
+          node.style.fill = '#008792'
+          break
+        }
+        case 'circle': {
+          node.size = 80
+          node.style.fill = '#C6E5FF'
+          break
+        }
+      }
+    })
+    redges.forEach(edge => {
+      if (!edge.style) {
+        edge.style = {}
+      }
+      if (parseInt(edge.target) > 5) {
+        edge.style.lineDash = [2, 2]
+        edge.style.endArrow = false
+      } else {
+        edge.style.endArrow = { path: G6.Arrow.vee(5, 20, 15), d: 15 }
+      }
+    })
+    this.graph.on('node:click', (e) => {
+    // 先将所有当前有 click 状态的节点的 click 状态置为 false
+      const clickNodes = this.graph.findAllByState('node', 'click')
+      clickNodes.forEach((cn) => {
+        this.graph.setItemState(cn, 'click', false)
+      })
+      const nodeItem = e.item
+      // 设置目标节点的 click 状态 为 true
+      this.graph.setItemState(nodeItem, 'click', true)
+      // this.graph.layout.nodesep(10)
+      // this.graph.layout.ranksep(10)
+      this.graph.data(this.repographdata)
+      this.graph.render()
+    })
   },
   methods: {
     initG6 () {
@@ -244,6 +290,7 @@ export default defineComponent({
   margin-bottom: 20px;
   /* margin-right: 20px; */
   margin-left: 0;
+  height: 100%;
 }
 
 .section-id {
@@ -257,13 +304,21 @@ export default defineComponent({
   /* height: 800px; */
   box-sizing: border-box;
   border: 1px solid #ccc;
-  margin-left: 20px;
+  margin-right: 1px;
   background-color: rgba(255, 255, 255, 0.7);
 }
 
 .grid {
     margin-top: 50px;
-    margin-left: 80px;
+    margin-left: 100px;
+    margin-right: 30px;
+    width: 90%;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.mygrid {
+    /* margin-top: 50px; */
+    /* margin-left: 100px; */
     margin-right: 30px;
     width: 90%;
     background-color: rgba(255, 255, 255, 0);
@@ -279,7 +334,7 @@ export default defineComponent({
   position: absolute;
   top: 0;
   right: 0;
-  opacity: 0.5;
+  /* opacity: 0.5; */
   /* transform: translate(0, -100%); */
 }
 

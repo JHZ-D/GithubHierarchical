@@ -47,37 +47,13 @@
           </n-grid>
         </n-card>
       </div> -->
-      <!-- <n-table :single-line="false">
-    <thead>
-      <tr>
-        <th>Repository</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="num in ">
-        <td>放弃</td>
-        <td>反常的</td>
-        <td>彻底废除</td>
-        <td>...</td>
-        <td>干！我刚才背的是啥</td>
-      </tr>
-      <tr>
-        <td>...</td>
-        <td>...</td>
-        <td>...</td>
-        <td>...</td>
-        <td>...</td>
-      </tr>
-    </tbody>
-  </n-table> -->
   <n-data-table style="height: 500px; width: 1500px; margin: 50px auto; --td-padding: 15px; --th-padding: 17px" :columns="columns" :data="repodata" :pagination="pagination" flex-height />
     </n-space>
   </div>
 </template>
 
 <script>
-import { defineComponent, reactive } from 'vue'
+import { h, defineComponent, reactive } from 'vue'
 import { Search, TrashOutline, Help as HelpIcon } from '@vicons/ionicons5'
 import { mapState, mapMutations } from 'vuex'
 import MultiSearchBread from '../components/MultiSearchBread.vue'
@@ -91,7 +67,10 @@ const columns = [
   {
     title: 'Repository',
     width: 400,
-    key: 'reponame'
+    key: 'reponame',
+    render (row, index) {
+      return h('a', { href: 'https://github.com/' + row.reponame, target: '_blank' }, row.reponame) // <a href="'https://github.com/'+repodata[index - 1]" target="_blank">{{ repodata[num - 1] }}</a>
+    }
   },
   {
     title: 'Description',
