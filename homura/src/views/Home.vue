@@ -134,6 +134,7 @@ import { defineComponent } from 'vue'
 import { mapState, mapMutations } from 'vuex'
 import { Help as HelpIcon, SearchOutline as SearchIcon, Mail as MailIcon, LogoGithub as SourceIcon } from '@vicons/ionicons5'
 import MultiSearchBread from '../components/MultiSearchBread.vue'
+import words from '@/assets/labelset.json'
 
 // let showed = false
 
@@ -153,6 +154,7 @@ export default defineComponent({
       current: 1,
       showModal: false,
       showContact: false,
+      words: words,
       // showSource: false,
       langOptions: [
         {
@@ -220,13 +222,22 @@ export default defineComponent({
   },
   computed: {
     searchOptions () {
-      return ['没做完', '是真的', '别想了'].map((suffix) => {
-        const prefix = this.searchValue.split('@')[0]
+      // const words = ['apple', 'banana', 'carrot', 'date', 'eggplant', 'Software development']
+      const words = this.words
+      const prefix = this.searchValue
+      return words.filter(word => word.toLocaleLowerCase().startsWith(prefix.toLocaleLowerCase())).map(word => {
         return {
-          label: prefix + suffix,
-          value: prefix + suffix
+          label: word,
+          value: word
         }
       })
+      // return ['没做完', '是真的', '别想了'].map((suffix) => {
+      //   const prefix = this.searchValue.split('@')[0]
+      //   return {
+      //     label: prefix + suffix,
+      //     value: prefix + suffix
+      //   }
+      // })
     },
     ...mapState({
       en: 'en',

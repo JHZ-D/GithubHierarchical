@@ -20,14 +20,19 @@
       <n-grid-item span="2">
         <n-grid :cols="1" :rows="2" :row-gap="16" class="mygrid">
           <n-grid-item span="1">
-            <n-card title="Model–view–viewmodel" size="huge" class="mycard">
-              Model–view–viewmodel (MVVM) is an architectural pattern in computer software that facilitates the separation of the development of the graphical user interface (GUI; the view)—be it via a markup language or GUI code—from the development of the business logic or back-end logic (the model) such that the view is not dependent upon any specific model platform.
+            <!-- <n-card title="Model–view–viewmodel" size="huge" class="mycard"> -->
+              <!-- <n-card title="NoneDay/CellReport" size="huge" class="mycard"> -->
+                <n-card title="Vue.js" size="huge" class="mycard">
+                Vue.js (commonly referred to as Vue; pronounced "view") is an open-source model–view–viewmodel front end JavaScript framework for building user interfaces and single-page applications. It was created by Evan You, and is maintained by him and the rest of the active core team members.
+              <!-- CellReport 是一个netcore实现的、以复杂统计报表为核心目标的制作、运行工具。支持数据看板、大屏制作。你可以使用数据库、excel文件、api服务、已有报表等为数据源，通过内置的集合函数组织数据，以类excel界面设计最终呈现结果。 -->
+              <!-- Model–view–viewmodel (MVVM) is an architectural pattern in computer software that facilitates the separation of the development of the graphical user interface (GUI; the view)—be it via a markup language or GUI code—from the development of the business logic or back-end logic (the model) such that the view is not dependent upon any specific model platform. -->
               <!-- jQuery is a JavaScript framework designed to simplify HTML DOM tree traversal and manipulation, as well as event handling, CSS animation, and Ajax. It is free, open-source software using the permissive MIT License. As of Aug 2022, jQuery is used by 77% of the 10 million most popular websites. Web analysis indicates that it is the most widely deployed JavaScript library by a large margin, having at least 3 to 4 times more usage than any other JavaScript library. -->
               <br><br><br>
-              <!-- Wikipedia Link: <a href="https://en.wikipedia.org/wiki/JQuery" target="_blank">https://en.wikipedia.org/wiki/JQuery</a> -->
-              Wikipedia Link: <a href="https://en.wikipedia.org/wiki/Model–view–viewmodel" target="_blank">https://en.wikipedia.org/wiki/Model–view–viewmodel</a>
-              <!-- <br><br>
-              Github Topic Link: <a href="https://github.com/topics/jquery" target="_blank">https://github.com/topics/jquery</a> -->
+              <!-- Github Repository Link: <a href="https://github.com/NoneDay/CellReport" target="_blank">https://github.com/NoneDay/CellReport</a> -->
+              Wikipedia Link: <a href="https://en.wikipedia.org/wiki/Vue.js" target="_blank">https://en.wikipedia.org/wiki/Vue.js</a>
+              <!-- Wikipedia Link: <a href="https://en.wikipedia.org/wiki/Model–view–viewmodel" target="_blank">https://en.wikipedia.org/wiki/Model–view–viewmodel</a> -->
+              <!-- <br><br> -->
+              <!-- Github Topic Link: <a href="https://github.com/topics/vue" target="_blank">https://github.com/topics/vue</a> -->
             </n-card>
           </n-grid-item>
           <n-grid-item span="1">
@@ -80,8 +85,8 @@ import G6 from '@antv/g6'
 // import graphdata from '@/assets/graph.json'
 // import graphdata from '@/assets/wholegraph.json'
 // import graphdata from '@/assets/webdevgraph.json'
-import graphdata from '@/assets/mvvmtreerepo.json'
-import repographdata from '@/assets/repograph.json'
+import graphdata from '@/assets/vuerepo.json'
+import repographdata from '@/assets/repodemotree.json'
 // import Legend from '@/components/Legend.vue'
 
 // const loadLimit = 20
@@ -131,36 +136,36 @@ export default defineComponent({
       })
     }
     this.initG6()
-    const rnodes = this.repographdata.nodes
-    const redges = this.repographdata.edges
-    rnodes.forEach(node => {
-      if (!node.style) {
-        node.style = {}
-      }
-      switch (node.type) {
-        case 'rect': {
-          node.size = [130, 40]
-          node.style.fill = '#008792'
-          break
-        }
-        case 'circle': {
-          node.size = 80
-          node.style.fill = '#C6E5FF'
-          break
-        }
-      }
-    })
-    redges.forEach(edge => {
-      if (!edge.style) {
-        edge.style = {}
-      }
-      if (parseInt(edge.target) > 5) {
-        edge.style.lineDash = [2, 2]
-        edge.style.endArrow = false
-      } else {
-        edge.style.endArrow = { path: G6.Arrow.vee(5, 20, 15), d: 15 }
-      }
-    })
+    // const rnodes = this.repographdata.nodes
+    // const redges = this.repographdata.edges
+    // rnodes.forEach(node => {
+    //   if (!node.style) {
+    //     node.style = {}
+    //   }
+    //   switch (node.type) {
+    //     case 'rect': {
+    //       node.size = [130, 40]
+    //       node.style.fill = '#008792'
+    //       break
+    //     }
+    //     case 'circle': {
+    //       node.size = 80
+    //       node.style.fill = '#C6E5FF'
+    //       break
+    //     }
+    //   }
+    // })
+    // redges.forEach(edge => {
+    //   if (!edge.style) {
+    //     edge.style = {}
+    //   }
+    //   if (parseInt(edge.target) > 5) {
+    //     edge.style.lineDash = [2, 2]
+    //     edge.style.endArrow = false
+    //   } else {
+    //     edge.style.endArrow = { path: G6.Arrow.vee(5, 20, 15), d: 15 }
+    //   }
+    // })
     this.graph.on('node:click', (e) => {
     // 先将所有当前有 click 状态的节点的 click 状态置为 false
       const clickNodes = this.graph.findAllByState('node', 'click')
@@ -354,7 +359,7 @@ export default defineComponent({
             break
           }
         }
-        if (node.id === 'pg3437') {
+        if (node.id === 'pg1000') {
           node.style.stroke = '#ffd400'
           node.style.lineWidth = 3
         }

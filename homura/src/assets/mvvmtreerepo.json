@@ -139,31 +139,6 @@
         }
        ],
        "group": 2
-      },
-      {
-       "id": "rp12916",
-       "label": "ryanmcdermott/clean-code-javascript",
-       "group": 4
-      },
-      {
-       "id": "rp153508",
-       "label": "ReactiveX/RxJava",
-       "group": 4
-      },
-      {
-       "id": "rp100452",
-       "label": "prettier/prettier",
-       "group": 4
-      },
-      {
-       "id": "rp169529",
-       "label": "binhnguyennus/awesome-scalability",
-       "group": 4
-      },
-      {
-       "id": "rp40701",
-       "label": "kamranahmedse/design-patterns-for-humans",
-       "group": 4
       }
      ],
      "group": 2

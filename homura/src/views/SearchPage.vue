@@ -64,7 +64,7 @@ import { h, defineComponent, reactive } from 'vue'
 import { Search, TrashOutline, Help as HelpIcon } from '@vicons/ionicons5'
 import { mapState, mapMutations } from 'vuex'
 import MultiSearchBread from '../components/MultiSearchBread.vue'
-import repodata from '@/assets/exrepos.json'
+import repodata from '@/assets/midrepos.json'
 
 // const tableData = Array.from(repodata).map((item, index) => ({
 //   key: index,
