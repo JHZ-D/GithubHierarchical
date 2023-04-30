@@ -2,20 +2,20 @@
   <div class="home">
     <n-tooltip trigger="hover">
       <template #trigger>
-        <n-button ghost circle size="large" @click="showModal = true" id="home-help-btn"><n-icon size="30"><HelpIcon/></n-icon></n-button>
+        <n-button ghost circle size="large" @click="showModal = true" id="home-help-btn"><n-icon size="30" color="#cde6c7"><HelpIcon/></n-icon></n-button>
       </template>
       帮助
     </n-tooltip>
     <n-tooltip trigger="hover">
       <template #trigger>
-        <n-button ghost circle size="large" @click="showContact = true" id="home-contact-btn"><n-icon size="30"><MailIcon/></n-icon></n-button>
+        <n-button ghost circle size="large" @click="showContact = true" id="home-contact-btn"><n-icon size="30" color="#cde6c7"><MailIcon/></n-icon></n-button>
       </template>
       联系我们
     </n-tooltip>
         <a href="https://github.com/JHZ-D/Wikipedia-graph-constructor" target="_blank">
     <n-tooltip trigger="hover">
       <template #trigger>
-          <n-button ghost circle size="large" id="home-source-btn"><n-icon size="30"><SourceIcon/></n-icon></n-button>
+          <n-button ghost circle size="large" id="home-source-btn"><n-icon size="30" color="#cde6c7"><SourceIcon/></n-icon></n-button>
       </template>
       开源地址
     </n-tooltip>
@@ -26,7 +26,7 @@
         ref="name"
         >
         <!-- PROJECT {{heroine}} -->
-        GITHUB HIERARCHICAL
+        GITHUB HIER-SEARCH
       </h1>
       <!-- <n-h6>{{en?"A":"一个"}} JAVADOC API {{en?" learning assistant system ":"学习助手服务"}}</n-h6>
       <p id="section-nav" class="home-p">{{en?"Start learn! From recommended ":"如果你是小白、不知从哪开始学，可以看看我们推荐的"}}<router-link class="link" to="/section"><n-gradient-text type="info">{{en?"learning entries":"学习入口"}}
@@ -39,7 +39,7 @@
         <n-dropdown @select="handleSearchSelect" trigger="click" :options="searchTypeOptions">
           <n-button :keyboard="false" id="search-choose">{{repo?"搜索仓库":"搜索知识点"}}</n-button>
         </n-dropdown>
-        <MultiSearchBread v-if="repo" style="order: 2; background-color: rgba(240, 248, 255, 0.7); padding: 10.333px 0; border-top:1px solid rgba(224, 224, 224, 1); border-bottom:1px solid rgba(224, 224, 224, 1)"></MultiSearchBread>
+        <MultiSearchBread v-if="repo" style="order: 2; background-color: rgba(240, 248, 255, 0.9); padding: 10.333px 0; border-top:1px solid rgba(224, 224, 224, 1); border-bottom:1px solid rgba(224, 224, 224, 1)"></MultiSearchBread>
         <div id="search-space">
           <n-auto-complete
             id="search-input"
@@ -50,7 +50,7 @@
           />
           <n-button circle @click="onSearchClick">
             <template #icon>
-              <n-icon><SearchIcon /></n-icon>
+              <n-icon color="#cde6c7"><SearchIcon /></n-icon>
             </template>
           </n-button>
         </div>
@@ -239,7 +239,7 @@ export default defineComponent({
 <style scope>
 .home {
   text-align: center;
-  background: url("../assets/hp169.jpg");
+  background: url("../assets/backgd5.jpg");
   width: 100%;
   height: 100%;
   background-size: cover;
@@ -248,7 +248,7 @@ export default defineComponent({
 #project-name {
   margin-top: 50px;
   /* color: #F1394B; */
-  color: royalblue;
+  color: #fedcbd;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 900;
   font-size: 600%;
@@ -352,6 +352,7 @@ export default defineComponent({
   font-size: x-large;
   font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: bolder;
+  color: #afb4db;
 }
 
 .home-h {

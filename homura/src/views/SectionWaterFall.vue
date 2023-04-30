@@ -20,12 +20,14 @@
       <n-grid-item span="2">
         <n-grid :cols="1" :rows="2" :row-gap="16" class="mygrid">
           <n-grid-item span="1">
-            <n-card title="jQuery" size="huge" class="mycard">
-              jQuery is a JavaScript framework designed to simplify HTML DOM tree traversal and manipulation, as well as event handling, CSS animation, and Ajax. It is free, open-source software using the permissive MIT License. As of Aug 2022, jQuery is used by 77% of the 10 million most popular websites. Web analysis indicates that it is the most widely deployed JavaScript library by a large margin, having at least 3 to 4 times more usage than any other JavaScript library.
+            <n-card title="Model–view–viewmodel" size="huge" class="mycard">
+              Model–view–viewmodel (MVVM) is an architectural pattern in computer software that facilitates the separation of the development of the graphical user interface (GUI; the view)—be it via a markup language or GUI code—from the development of the business logic or back-end logic (the model) such that the view is not dependent upon any specific model platform.
+              <!-- jQuery is a JavaScript framework designed to simplify HTML DOM tree traversal and manipulation, as well as event handling, CSS animation, and Ajax. It is free, open-source software using the permissive MIT License. As of Aug 2022, jQuery is used by 77% of the 10 million most popular websites. Web analysis indicates that it is the most widely deployed JavaScript library by a large margin, having at least 3 to 4 times more usage than any other JavaScript library. -->
               <br><br><br>
-              Wikipedia Link: <a href="https://en.wikipedia.org/wiki/JQuery" target="_blank">https://en.wikipedia.org/wiki/JQuery</a>
-              <br><br>
-              Github Topic Link: <a href="https://github.com/topics/jquery" target="_blank">https://github.com/topics/jquery</a>
+              <!-- Wikipedia Link: <a href="https://en.wikipedia.org/wiki/JQuery" target="_blank">https://en.wikipedia.org/wiki/JQuery</a> -->
+              Wikipedia Link: <a href="https://en.wikipedia.org/wiki/Model–view–viewmodel" target="_blank">https://en.wikipedia.org/wiki/Model–view–viewmodel</a>
+              <!-- <br><br>
+              Github Topic Link: <a href="https://github.com/topics/jquery" target="_blank">https://github.com/topics/jquery</a> -->
             </n-card>
           </n-grid-item>
           <n-grid-item span="1">
@@ -78,7 +80,7 @@ import G6 from '@antv/g6'
 // import graphdata from '@/assets/graph.json'
 // import graphdata from '@/assets/wholegraph.json'
 // import graphdata from '@/assets/webdevgraph.json'
-import graphdata from '@/assets/jslibtree.json'
+import graphdata from '@/assets/mvvmtreerepo.json'
 import repographdata from '@/assets/repograph.json'
 // import Legend from '@/components/Legend.vue'
 
@@ -178,88 +180,225 @@ export default defineComponent({
     initG6 () {
       // const graphData = this.jsonGraphData
       const containerG6 = this.$refs.containerG6
-      const nodes = this.jsonGraphData.nodes
-      // const edges = this.jsonGraphData.edges
-      nodes.forEach(node => {
-        // node.label = node.id
-        if (!node.style) {
-          node.style = {}
-        }
-        switch (node.type) {
-          case 'ellipse': {
-            node.size = [120, 40]
-            node.style.fill = '#afb4db'
-            break
-          }
-          case 'rect': {
-            node.size = [130, 40]
-            node.style.fill = '#008792'
-            break
-          }
-          case 'circle': {
-            node.size = 80
-            node.style.fill = '#C6E5FF'
-            break
-          }
-        }
-        if (node.id === 'jquery') {
-          node.style.stroke = '#ffd400'
-          node.style.lineWidth = 3
-        }
-      })
+      // const nodes = this.jsonGraphData.nodes
+      // // const edges = this.jsonGraphData.edges
+      // nodes.forEach(node => {
+      //   // node.label = node.id
+      //   if (!node.style) {
+      //     node.style = {}
+      //   }
+      //   switch (node.type) {
+      //     case 'ellipse': {
+      //       node.size = [120, 40]
+      //       node.style.fill = '#afb4db'
+      //       break
+      //     }
+      //     case 'rect': {
+      //       node.size = [130, 40]
+      //       node.style.fill = '#008792'
+      //       break
+      //     }
+      //     case 'circle': {
+      //       node.size = 80
+      //       node.style.fill = '#C6E5FF'
+      //       break
+      //     }
+      //   }
+      //   if (node.id === 'jquery') {
+      //     node.style.stroke = '#ffd400'
+      //     node.style.lineWidth = 3
+      //   }
+      // })
 
-      this.graph = new G6.Graph({
+      this.graph = new G6.TreeGraph({
         container: containerG6,
         // width: 800,
         height: 650,
         fitView: true,
         modes: {
-          default: ['drag-canvas', 'zoom-canvas']
+          default: ['drag-canvas', 'zoom-canvas', 'drag-node']
         },
+        // defaultNode: {
+        //   // size: [100, 40],
+        //   style: {
+        //     // fill: '#C6E5FF',
+        //     stroke: '#5B8FF9'
+        //   },
+        //   labelCfg: {
+        //     style: {
+        //       fill: '#00287E',
+        //       fontSize: 12
+        //     }
+        //   }
+        // },
         defaultNode: {
-          // size: [100, 40],
-          style: {
-            // fill: '#C6E5FF',
-            stroke: '#5B8FF9'
-          },
-          labelCfg: {
-            style: {
-              fill: '#00287E',
-              fontSize: 12
-            }
-          }
+          size: 40,
+          anchorPoints: [
+            [0.5, 0],
+            [0.5, 1]
+          ]
         },
         defaultEdge: {
-          // type: 'cubic-vertical',
-          type: 'line',
-          style: {
-            stroke: '#A3B1BF',
-            // endArrow: true
-            endArrow: {
-              path: G6.Arrow.vee(5, 20, 15), // 使用内置箭头路径函数，参数为箭头的 宽度、长度、偏移量（默认为 0，与 d 对应）
-              d: 15
-            }
-          }
+          type: 'cubic-vertical'
         },
         layout: {
-          type: 'dagre',
-          // type: 'force2',
-          rankdir: 'TB'
-          // nodesep: 25,
-          // ranksep: 25
-          // type: 'radial'
-          // center: [200, 200], // 可选，默认为图的中心
-          // linkDistance: 50, // 可选，边长
-          // nodeStrength: 30, // 可选
-          // edgeStrength: 0.1, // 可选
-          // nodeSize: 30, // 可选
-          // onTick: () => { // 可选
-          //   console.log('ticking')
-          // }
+          type: 'compactBox',
+          direction: 'TB',
+          excludeInvisibles: true,
+          getId: function getId (d) {
+            return d.id
+          },
+          getHeight: function getHeight () {
+            return 32
+          },
+          getWidth: function getWidth () {
+            return 16
+          },
+          getVGap: function getVGap () {
+            return 80
+          },
+          getHGap: function getHGap () {
+            return 60
+          }
+        }
+        // defaultEdge: {
+        //   // type: 'cubic-vertical',
+        //   type: 'line',
+        //   style: {
+        //     stroke: '#A3B1BF',
+        //     // endArrow: true
+        //     endArrow: {
+        //       path: G6.Arrow.vee(5, 20, 15), // 使用内置箭头路径函数，参数为箭头的 宽度、长度、偏移量（默认为 0，与 d 对应）
+        //       d: 15
+        //     }
+        //   }
+        // },
+        // layout: {
+        //   type: 'compactBox',
+        //   direction: 'TB'
+        //   // type: 'dagre',
+        //   // type: 'force2',
+        //   // rankdir: 'TB'
+        //   // nodesep: 25,
+        //   // ranksep: 25
+        //   // type: 'radial'
+        //   // center: [200, 200], // 可选，默认为图的中心
+        //   // linkDistance: 50, // 可选，边长
+        //   // nodeStrength: 30, // 可选
+        //   // edgeStrength: 0.1, // 可选
+        //   // nodeSize: 30, // 可选
+        //   // onTick: () => { // 可选
+        //   //   console.log('ticking')
+        //   // }
+        // }
+      })
+      // const centernode = this.graph.findById('0')
+      // const neighbors = centernode.getNeighbors()
+      this.graph.node(function (node) {
+        // const neighbors = node.getNeighbors()
+        // let hide = 1
+        // for (let i = 0; i < neighbors.length; i++) {
+        //   if (neighbors[i].id === '0') {
+        //     hide = 0
+        //     break
+        //   }
+        // }
+        // if (hide === 1) {
+
+        // let position = 'center'
+        // const centernode = this.graph.findById('0')
+        // if (!node.getNeighbors().includes(centernode)) {
+        //   this.graph.hideItem(node)
+        // }
+        // if (!neighbors.includes(node)) {
+        //   this.graph.hideItem(node)
+        // }
+        // if ('')
+        // let rotate = 0
+        // if (node.children === []) {
+        //   // position = 'bottom'
+        //   rotate = Math.PI / 2
+        // }
+        if (!node.style) {
+          node.style = {}
+        }
+        switch (node.group) {
+          case 0: {
+            node.size = [150, 55]
+            node.style.fill = '#afb4db'
+            node.type = 'ellipse'
+            break
+          }
+          case 1: {
+            node.size = [150, 55]
+            node.style.fill = '#afb4db'
+            node.type = 'ellipse'
+            break
+          }
+          case 4: {
+            node.size = [220, 40]
+            node.style.fill = '#008792'
+            node.type = 'rect'
+            break
+          }
+          case 2: {
+            node.size = 100
+            node.style.fill = '#C6E5FF'
+            node.type = 'circle'
+            break
+          }
+          case 3: {
+            node.size = 100
+            node.style.fill = '#C6E5FF'
+            node.type = 'circle'
+            break
+          }
+        }
+        if (node.id === 'pg3437') {
+          node.style.stroke = '#ffd400'
+          node.style.lineWidth = 3
+        }
+        return {
+          label: node.label,
+          labelCfg: {
+            // position,
+            // offset: 5,
+            style: {
+              // textAlign: 'start'
+            }
+          }
         }
       })
       this.graph.data(this.jsonGraphData)
+      //   const rnodes = this.repographdata.nodes
+      // rnodes.forEach(node => {
+      //   if (!node.style) {
+      //     node.style = {}
+      //   }
+      //   switch (node.type) {
+      //     case 'rect': {
+      //       node.size = [130, 40]
+      //       node.style.fill = '#008792'
+      //       break
+      //     }
+      //     case 'circle': {
+      //       node.size = 80
+      //       node.style.fill = '#C6E5FF'
+      //       break
+      //     }
+      //   }
+      // })
+      // const neighbors = node.getNeighbors()
+      //   let hide = 1
+      //   for (let i = 0; i < neighbors.length; i++) {
+      //     if (neighbors[i].id === '0') {
+      //       hide = 0
+      //       break
+      //     }
+      //   }
+      //   if (hide === 1) {
       this.graph.render()
+      this.graph.fitView()
     }
   },
   computed: {

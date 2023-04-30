@@ -3,7 +3,7 @@
     <n-space vertical size="large" class="space-back">
       <div style="background-color: rgba(255, 255, 255, 0.1);">
         <n-layout>
-          <n-layout-header bordered id="header" style="background-color: rgba(118, 190, 204,0.9);">
+          <n-layout-header bordered id="header" style="background-color: rgba(175, 223, 228,0.9);">
             <n-space id="head-space" size="huge" align="baseline">
               <n-h1>Github层次化检索系统</n-h1>
                 <n-tooltip trigger="hover">
@@ -229,19 +229,21 @@ export default defineComponent({
 } */
 
 .search-page {
-  background: url("../assets/backgd.jpg");
+  /* background: url("../assets/backgd1.jpg"); */
+  background-image: linear-gradient(white, #7bbfea);
+
   width: 100%;
   height: 100%;
   background-size: cover;
   background-attachment:fixed;
 }
 
-.space-back {
+/* .space-back {
   background: url("../assets/backgd.jpg");
   background-size: cover;
   background-attachment:fixed;
   margin-bottom: 0;
-}
+} */
 
 .headerasearch {
   background-color:rgba(220,38,38,0.2);
