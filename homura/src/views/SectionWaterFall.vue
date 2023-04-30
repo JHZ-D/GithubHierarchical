@@ -75,7 +75,10 @@ import { useNotification, NAvatar } from 'naive-ui'
 import { Help as HelpIcon } from '@vicons/ionicons5'
 import { mapState } from 'vuex'
 import G6 from '@antv/g6'
-import graphdata from '@/assets/graph.json'
+// import graphdata from '@/assets/graph.json'
+// import graphdata from '@/assets/wholegraph.json'
+// import graphdata from '@/assets/webdevgraph.json'
+import graphdata from '@/assets/jslibtree.json'
 import repographdata from '@/assets/repograph.json'
 // import Legend from '@/components/Legend.vue'
 
@@ -178,7 +181,7 @@ export default defineComponent({
       const nodes = this.jsonGraphData.nodes
       // const edges = this.jsonGraphData.edges
       nodes.forEach(node => {
-        node.label = node.id
+        // node.label = node.id
         if (!node.style) {
           node.style = {}
         }
@@ -240,9 +243,19 @@ export default defineComponent({
         },
         layout: {
           type: 'dagre',
-          rankdir: 'TB',
-          nodesep: 25,
-          ranksep: 25
+          // type: 'force2',
+          rankdir: 'TB'
+          // nodesep: 25,
+          // ranksep: 25
+          // type: 'radial'
+          // center: [200, 200], // 可选，默认为图的中心
+          // linkDistance: 50, // 可选，边长
+          // nodeStrength: 30, // 可选
+          // edgeStrength: 0.1, // 可选
+          // nodeSize: 30, // 可选
+          // onTick: () => { // 可选
+          //   console.log('ticking')
+          // }
         }
       })
       this.graph.data(this.jsonGraphData)
@@ -340,7 +353,8 @@ export default defineComponent({
 }
 
 #SectionWhole {
-  background-image: url('../assets/backgd.jpg');
+  /* background-image: url('../assets/backgd4.jpg'); */
+  background-image: linear-gradient(white, #afb4db);
   background-size: cover;
   background-attachment:fixed;
   width: 100%;
