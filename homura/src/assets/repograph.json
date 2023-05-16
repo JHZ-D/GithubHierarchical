@@ -6,101 +6,52 @@
     },{
         "id": "1",
         "type": "circle",
-        "label": "vue.js"
+        "label": "opensource"
     },{
         "id": "2",
         "type": "circle",
-        "label": "vue.js"
+        "label": "reporting"
     },{
         "id": "3",
         "type": "circle",
-        "label": "vue.js"
+        "label": ".net"
     },{
         "id": "4",
         "type": "circle",
-        "label": "vue.js"
+        "label": "netcore"
     },{
         "id": "5",
-        "label": "echarts",
+        "label": "asp.net-mvc",
         "type": "circle"
     },{
         "id": "6",
-        "label": "ElemeFE/element",
-        "type": "rect"
+        "label": "dotnet6",
+        "type": "circle"
     },{
         "id": "7",
-        "label": "imcvampire/vue-axios",
-        "type": "rect"
-    },{
-        "id": "8",
-        "label": "vuejs/router",
-        "type": "rect"
-    },{
-        "id": "9",
-        "label": "vuejs/vuex",
-        "type": "rect"
-    },{
-        "id": "10",
-        "label": "apache/echarts",
-        "type": "rect"
-    },{
-        "id": "11",
-        "label": "jbaysolutions/vue-grid-layout",
-        "type": "rect"
-    },{
-        "id": "12",
-        "label": "prettier/prettier",
-        "type": "rect"
-    },{
-        "id": "13",
-        "label": "vuejs/vue",
-        "type": "rect"
-    },{
-        "id": "14",
-        "label": "SortableJS/Vue.Draggable",
+        "label": "NoneDay/CellReport",
         "type": "rect"
     }],
     "edges": [{
         "source": "0", 
-        "target": "1"
-    },{
-        "source": "1",
-        "target": "2"
-    },{
-        "source": "2",
-        "target": "3"
-    },{
-        "source": "3",
-        "target": "4"
-    },{
-        "source": "1",
-        "target": "5"
-    },{
-        "source": "0",
-        "target": "6"
+        "target": "7"
     },{
         "source": "1",
         "target": "7"
     },{
-        "source": "1",
-        "target": "8"
+        "source": "2",
+        "target": "7"
     },{
-        "source": "1",
-        "target": "9"
+        "source": "3",
+        "target": "7"
+    },{
+        "source": "4",
+        "target": "7"
     },{
         "source": "5",
-        "target": "10"
+        "target": "7"
     },{
-        "source": "4",
-        "target": "11"
-    },{
-        "source": "4",
-        "target": "12"
-    },{
-        "source": "4",
-        "target": "13"
-    },{
-        "source": "4",
-        "target": "14"
+        "source": "6",
+        "target": "7"
     }]
 }
