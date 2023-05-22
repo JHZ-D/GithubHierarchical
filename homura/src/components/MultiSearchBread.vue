@@ -8,16 +8,6 @@
           </div>
         </n-dropdown>
       </n-breadcrumb-item>
-      <!-- <n-breadcrumb-item v-if="noNext">
-        {{ objArr[chooseArray.length - 1] }}
-      </n-breadcrumb-item> -->
-      <!-- <n-breadcrumb-item>
-        <n-dropdown v-bind:options="chooseArray[chooseArray.length-1]" @select="updateObjArr($event, chooseArray.length)">
-          <div class="trigger">
-            {{ noNext?objArr[chooseArray.length - 1]:"选择topic" }}
-          </div>
-        </n-dropdown>
-      </n-breadcrumb-item> -->
     </n-breadcrumb></div>
   </template>
 
@@ -29,101 +19,6 @@ export default defineComponent({
   name: 'MultiSearchBread',
   data () {
     return {
-      // array: [
-      //   {
-      //     name: 'A',
-      //     level: 1,
-      //     parent_id: null,
-      //     id: 1,
-      //     value: 1,
-      //     label: 'A-Long',
-      //     key: 1,
-      //     childrens: [
-      //       {
-      //         name: 'A-A',
-      //         level: 2,
-      //         parent_id: 1,
-      //         id: 4,
-      //         key: 4,
-      //         value: 4,
-      //         label: 'A-A',
-      //         childrens: [
-      //           {
-      //             name: 'A-A-A',
-      //             level: 3,
-      //             parent_id: 4,
-      //             key: 10,
-      //             id: 10,
-      //             value: 10,
-      //             label: 'A-A-A',
-      //             childrens: []
-      //           },
-      //           {
-      //             name: 'A-A-B',
-      //             level: 3,
-      //             parent_id: 4,
-      //             id: 11,
-      //             value: 11,
-      //             key: 11,
-      //             label: 'A-A-B',
-      //             childrens: []
-      //           }
-      //         ]
-      //       },
-      //       {
-      //         name: 'A-B',
-      //         level: 2,
-      //         parent_id: 1,
-      //         id: 5,
-      //         value: 5,
-      //         key: 5,
-      //         label: 'A-B',
-      //         childrens: []
-      //       }
-      //     ]
-      //   },
-      //   {
-      //     name: 'B',
-      //     level: 1,
-      //     parent_id: null,
-      //     id: 3,
-      //     value: 3,
-      //     label: 'B',
-      //     key: 3,
-      //     childrens: [
-      //       {
-      //         name: 'B-A',
-      //         level: 2,
-      //         parent_id: 3,
-      //         id: 8,
-      //         value: 8,
-      //         key: 8,
-      //         label: 'B-A',
-      //         childrens: []
-      //       },
-      //       {
-      //         name: 'B-B',
-      //         level: 2,
-      //         parent_id: 3,
-      //         id: 9,
-      //         value: 9,
-      //         key: 9,
-      //         label: 'B-B',
-      //         childrens: []
-      //       }
-      //     ]
-      //   },
-      //   {
-      //     name: 'C',
-      //     level: 1,
-      //     parent_id: null,
-      //     id: 99,
-      //     key: 99,
-      //     value: 99,
-      //     label: 'C',
-      //     childrens: []
-      //   }
-      // ],
       array: array,
       chooseArray: [],
       // el-select选中的数据

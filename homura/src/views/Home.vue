@@ -185,6 +185,19 @@ export default defineComponent({
   //   }
   // },
   methods: {
+    async onSearchClick () {
+      if (this.searchValue === '') {
+        return
+      }
+      this.$router.push('/section')
+      // const paramObj = {
+      //   query: this.searchValue
+      // }
+      // const literalRes = await this.$http.post(this.loadUrl, paramObj)
+      // const literalData = literalRes.data.data
+      // this.literal_items = literalData
+      // this.messageBox.success('thread info list loaded', { duration: 500 })
+    },
     handleLangSelect (key) {
       this.set_language(key)
     },

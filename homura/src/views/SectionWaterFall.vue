@@ -21,14 +21,15 @@
         <n-grid :cols="1" :rows="2" :row-gap="16" class="mygrid">
           <n-grid-item span="1">
             <!-- <n-card title="Model–view–viewmodel" size="huge" class="mycard"> -->
-              <n-card title="NoneDay/CellReport" size="huge" class="mycard">
+              <n-card :title="crepo?'NoneDay/CellReport':'Vue.js'" size="huge" class="mycard">
                 <!-- <n-card title="Vue.js" size="huge" class="mycard">
                 Vue.js (commonly referred to as Vue; pronounced "view") is an open-source model–view–viewmodel front end JavaScript framework for building user interfaces and single-page applications. It was created by Evan You, and is maintained by him and the rest of the active core team members. -->
-              CellReport 是一个netcore实现的、以复杂统计报表为核心目标的制作、运行工具。支持数据看板、大屏制作。你可以使用数据库、excel文件、api服务、已有报表等为数据源，通过内置的集合函数组织数据，以类excel界面设计最终呈现结果。
+                {{crepo?"CellReport 是一个netcore实现的、以复杂统计报表为核心目标的制作、运行工具。支持数据看板、大屏制作。你可以使用数据库、excel文件、api服务、已有报表等为数据源，通过内置的集合函数组织数据，以类excel界面设计最终呈现结果。":'Vue.js (commonly referred to as Vue; pronounced "view") is an open-source model–view–viewmodel front end JavaScript framework for building user interfaces and single-page applications. It was created by Evan You, and is maintained by him and the rest of the active core team members.'}}
+                <!-- CellReport 是一个netcore实现的、以复杂统计报表为核心目标的制作、运行工具。支持数据看板、大屏制作。你可以使用数据库、excel文件、api服务、已有报表等为数据源，通过内置的集合函数组织数据，以类excel界面设计最终呈现结果。 -->
               <!-- Model–view–viewmodel (MVVM) is an architectural pattern in computer software that facilitates the separation of the development of the graphical user interface (GUI; the view)—be it via a markup language or GUI code—from the development of the business logic or back-end logic (the model) such that the view is not dependent upon any specific model platform. -->
               <!-- jQuery is a JavaScript framework designed to simplify HTML DOM tree traversal and manipulation, as well as event handling, CSS animation, and Ajax. It is free, open-source software using the permissive MIT License. As of Aug 2022, jQuery is used by 77% of the 10 million most popular websites. Web analysis indicates that it is the most widely deployed JavaScript library by a large margin, having at least 3 to 4 times more usage than any other JavaScript library. -->
               <br><br><br>
-              Github Repository Link: <a href="https://github.com/NoneDay/CellReport" target="_blank">https://github.com/NoneDay/CellReport</a>
+              {{crepo?"Github Repository":'Wikipedia'}} Link: <a href="https://github.com/NoneDay/CellReport" target="_blank">{{crepo?"https://github.com/NoneDay/CellReport":"https://en.wikipedia.org/wiki/Vue.js"}}</a>
               <!-- Wikipedia Link: <a href="https://en.wikipedia.org/wiki/Vue.js" target="_blank">https://en.wikipedia.org/wiki/Vue.js</a> -->
               <!-- Wikipedia Link: <a href="https://en.wikipedia.org/wiki/Model–view–viewmodel" target="_blank">https://en.wikipedia.org/wiki/Model–view–viewmodel</a> -->
               <!-- <br><br> -->
@@ -86,6 +87,7 @@ import G6 from '@antv/g6'
 // import graphdata from '@/assets/wholegraph.json'
 // import graphdata from '@/assets/webdevgraph.json'
 import graphdata from '@/assets/vuerepo.json'
+import graphdata1 from '@/assets/vuerepo2.json'
 import repographdata from '@/assets/repodemotree1.json'
 // import Legend from '@/components/Legend.vue'
 
@@ -103,8 +105,10 @@ export default defineComponent({
       messageBox: undefined,
       showModal: false,
       jsonGraphData: graphdata,
+      jsonGraphData1: graphdata1,
       graph: null,
-      repographdata: repographdata
+      repographdata: repographdata,
+      crepo: false
     }
   },
   components: {
@@ -177,10 +181,18 @@ export default defineComponent({
       this.graph.setItemState(nodeItem, 'click', true)
       // this.graph.layout.nodesep(10)
       // this.graph.layout.ranksep(10)
+      if (nodeItem._cfg.id === 'tp445') {
+        this.graph.changeData(this.jsonGraphData1)
+        this.graph.updateLayout({ type: 'compactBox', direction: 'TB', getVGap: function getVGap () { return 80 }, getHGap: function getHGap () { return 90 } })
+        // this.graph.updateLayout({ type: 'compactBox', direction: 'TB', getHeight: function getHeight () { return 32 }, getWidth: function getWidth () { return 16 }, getVGap: function getVGap () { return 80 }, getHGap: function getHGap () { return 60 } })
+        // this.graph.render()
+        return
+      }
       this.graph.data(this.repographdata)
       // this.graph.layout.direction = 'BT'
-      this.graph.updateLayout({ direction: 'BT', preventOverlap: true })
+      this.graph.updateLayout({ type: 'compactBox', direction: 'BT', getHeight: function getHeight () { return 32 }, getWidth: function getWidth () { return 16 }, getVGap: function getVGap () { return 80 }, getHGap: function getHGap () { return 60 } })
       this.graph.render()
+      this.crepo = true
     })
   },
   methods: {
@@ -219,9 +231,10 @@ export default defineComponent({
 
       this.graph = new G6.TreeGraph({
         container: containerG6,
-        // width: 800,
+        width: 800,
         height: 650,
         fitView: true,
+        fitCenter: true,
         modes: {
           default: ['drag-canvas', 'zoom-canvas', 'drag-node']
         },
@@ -343,7 +356,7 @@ export default defineComponent({
             break
           }
           case 4: {
-            node.size = [220, 40]
+            node.size = [180, 40]
             node.style.fill = '#008792'
             node.type = 'rect'
             break
@@ -406,6 +419,7 @@ export default defineComponent({
       //   if (hide === 1) {
       this.graph.render()
       this.graph.fitView()
+      // this.graph.fitCenter()
     }
   },
   computed: {
