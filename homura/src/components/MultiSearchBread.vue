@@ -3,7 +3,7 @@
     <n-breadcrumb class="breadcrumb">
       <n-breadcrumb-item class="breadcrumbitem" v-for="num in chooseArray.length" :key="num">
         <!-- {{ objArr[num-1] }} -->
-        <n-dropdown v-bind:options="chooseArray[num-1]" @select="updateObjArr($event, num)">
+        <n-dropdown v-bind:options="chooseArray[num-1]" @select="updateObjArr($event, num)" style="height: 40px;">
           <div class="trigger"  v-text="noNext || num < chooseArray.length?objArr[num - 1]:'选择topic'">
           </div>
         </n-dropdown>
@@ -13,7 +13,7 @@
 
 <script>
 import { defineComponent } from 'vue'
-import array from '@/assets/arr.json'
+import array from '@/assets/breadarr1.json'
 
 export default defineComponent({
   name: 'MultiSearchBread',

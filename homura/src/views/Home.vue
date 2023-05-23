@@ -47,6 +47,7 @@
             v-model:value="searchValue"
             size="large"
             :placeholder="repo?'输入仓库':'输入知识点，如Software development, Java, Spring, vue...'"
+            :get-show="getShow"
           />
           <n-button circle @click="onSearchClick">
             <template #icon>
@@ -186,10 +187,14 @@ export default defineComponent({
   // },
   methods: {
     async onSearchClick () {
-      if (this.searchValue === '') {
-        return
+      if (this.repo === true) {
+        this.$router.push('/search')
+      } else {
+        if (this.searchValue === '') {
+          return
+        }
+        this.$router.push('/section')
       }
-      this.$router.push('/section')
       // const paramObj = {
       //   query: this.searchValue
       // }
@@ -236,6 +241,9 @@ export default defineComponent({
   computed: {
     searchOptions () {
       // const words = ['apple', 'banana', 'carrot', 'date', 'eggplant', 'Software development']
+      if (this.repo === true) {
+        return []
+      }
       const words = this.words
       const prefix = this.searchValue
       return words.filter(word => word.toLocaleLowerCase().startsWith(prefix.toLocaleLowerCase())).map(word => {
