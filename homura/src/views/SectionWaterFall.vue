@@ -108,7 +108,8 @@ export default defineComponent({
       jsonGraphData1: graphdata1,
       graph: null,
       repographdata: repographdata,
-      crepo: false
+      crepo: false,
+      result: {} // 用来存储后端传回来的结果
     }
   },
   components: {
@@ -122,6 +123,8 @@ export default defineComponent({
   //   await this.fetchSections()
   // },
   mounted () {
+    // 获取参数并赋值给result
+    this.result = this.$route.query.data
     const notification = useNotification()
     if (!showed) {
       showed = true
@@ -389,7 +392,8 @@ export default defineComponent({
           }
         }
       })
-      this.graph.data(this.jsonGraphData)
+      // this.graph.data(this.jsonGraphData)
+      this.graph.data(this.result.graph)
       //   const rnodes = this.repographdata.nodes
       // rnodes.forEach(node => {
       //   if (!node.style) {

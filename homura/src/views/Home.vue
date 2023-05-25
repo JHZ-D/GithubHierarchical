@@ -134,6 +134,7 @@
 import { defineComponent } from 'vue'
 import { mapState, mapMutations } from 'vuex'
 import { Help as HelpIcon, SearchOutline as SearchIcon, Mail as MailIcon, LogoGithub as SourceIcon } from '@vicons/ionicons5'
+import axios from 'axios'
 import MultiSearchBread from '../components/MultiSearchBread.vue'
 import words from '@/assets/labelset.json'
 
@@ -188,12 +189,24 @@ export default defineComponent({
   methods: {
     async onSearchClick () {
       if (this.repo === true) {
+        axios.get('/repo', { params: { text: this.searchValue } })
+          .then(res => {
+            // res.data是后端传回来的结果，假设是一个数组
+            // 使用路由跳转到新页面，并把结果作为参数传递
+            this.$router.push({ path: '/search', query: { data: res.data } })
+          })
         this.$router.push('/search')
       } else {
         if (this.searchValue === '') {
           return
         }
-        this.$router.push('/section')
+        // 在发送用户输入的文本给后端后，接收后端传回来的结果
+        axios.get('/getKnowp', { params: { text: this.searchValue } })
+          .then(res => {
+            // res.data是后端传回来的结果，假设是一个数组
+            // 使用路由跳转到新页面，并把结果作为参数传递
+            this.$router.push({ path: '/section', query: { data: res.data } })
+          })
       }
       // const paramObj = {
       //   query: this.searchValue

@@ -101,8 +101,13 @@ export default defineComponent({
       messageBox: undefined,
       literal_items: [],
       showModal: false,
-      repodata: repodata
+      repodata: repodata,
+      result: []
     }
+  },
+  mounted () {
+    // 获取参数并赋值给result
+    this.result = this.$route.query.data
   },
   setup () {
     const paginationReactive = reactive({
