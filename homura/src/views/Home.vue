@@ -201,7 +201,7 @@ export default defineComponent({
           return
         }
         // 在发送用户输入的文本给后端后，接收后端传回来的结果
-        axios.get('/getKnowp', { params: { text: this.searchValue } })
+        axios.get('/getKnowp', { params: { text: ':S' + this.searchValue } })
           .then(res => {
             // res.data是后端传回来的结果，假设是一个数组
             // 使用路由跳转到新页面，并把结果作为参数传递
