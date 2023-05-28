@@ -137,6 +137,7 @@ import { Help as HelpIcon, SearchOutline as SearchIcon, Mail as MailIcon, LogoGi
 import axios from 'axios'
 import MultiSearchBread from '../components/MultiSearchBread.vue'
 import words from '@/assets/labelset.json'
+import knowpdict from '@/assets/knowpdict.json'
 
 // let showed = false
 
@@ -157,6 +158,7 @@ export default defineComponent({
       showModal: false,
       showContact: false,
       words: words,
+      knowpdict: knowpdict,
       // showSource: false,
       langOptions: [
         {
@@ -200,12 +202,14 @@ export default defineComponent({
         if (this.searchValue === '') {
           return
         }
+        axios.get('/getKnowp', { params: { text: this.knowpdict[this.searchValue] } })
         // 在发送用户输入的文本给后端后，接收后端传回来的结果
-        axios.get('/getKnowp', { params: { text: ':S' + this.searchValue } })
+        // axios.get('/getKnowp', { params: { text: ':S' + this.searchValue } })
           .then(res => {
             // res.data是后端传回来的结果，假设是一个数组
             // 使用路由跳转到新页面，并把结果作为参数传递
-            this.$router.push({ path: '/section', query: { data: res.data } })
+            this.$router.push({ path: '/section', query: { graph: JSON.stringify(res.data.graph), description: res.data.description, url: res.data.url } })
+            // this.$router.push({ name: 'Section', params: { data: res.data } })
           })
       }
       // const paramObj = {

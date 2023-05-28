@@ -124,7 +124,7 @@ export default defineComponent({
   // },
   mounted () {
     // 获取参数并赋值给result
-    this.result = this.$route.query.data
+    this.result = { graph: JSON.parse(this.$route.query.graph), description: this.$route.query.description, url: this.$route.query.url }
     const notification = useNotification()
     if (!showed) {
       showed = true
