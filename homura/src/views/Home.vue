@@ -39,7 +39,7 @@
         <n-dropdown @select="handleSearchSelect" trigger="click" :options="searchTypeOptions">
           <n-button :keyboard="false" id="search-choose">{{repo?"搜索仓库":"搜索知识点"}}</n-button>
         </n-dropdown>
-        <MultiSearchBread v-if="repo" style="order: 2; background-color: rgba(240, 248, 255, 0.9); padding: 10.333px 0; border-top:1px solid rgba(224, 224, 224, 1); border-bottom:1px solid rgba(224, 224, 224, 1)"></MultiSearchBread>
+        <MultiSearchBread @receive="getMsg" v-if="repo" style="order: 2; background-color: rgba(240, 248, 255, 0.9); padding: 10.333px 0; border-top:1px solid rgba(224, 224, 224, 1); border-bottom:1px solid rgba(224, 224, 224, 1)"></MultiSearchBread>
         <div id="search-space">
           <n-auto-complete
             id="search-input"
@@ -159,6 +159,8 @@ export default defineComponent({
       showContact: false,
       words: words,
       knowpdict: knowpdict,
+      chosenCate: '',
+      objArr: [],
       // showSource: false,
       langOptions: [
         {
@@ -189,9 +191,13 @@ export default defineComponent({
   //   }
   // },
   methods: {
+    getMsg (data) {
+      this.chosenCate = data.chosenCate
+      this.objArr = data.objArr
+    },
     async onSearchClick () {
       if (this.repo === true) {
-        axios.get('/repo', { params: { text: this.searchValue } })
+        axios.get('/repo', { params: { text: this.searchValue, cate: this.chosenCate } })
           .then(res => {
             // res.data是后端传回来的结果，假设是一个数组
             // 使用路由跳转到新页面，并把结果作为参数传递
@@ -208,7 +214,7 @@ export default defineComponent({
           .then(res => {
             // res.data是后端传回来的结果，假设是一个数组
             // 使用路由跳转到新页面，并把结果作为参数传递
-            this.$router.push({ path: '/section', query: { graph: JSON.stringify(res.data.graph), description: res.data.description, url: res.data.url } })
+            this.$router.push({ path: '/section', query: { graph: JSON.stringify(res.data.graph), description: res.data.description, url: res.data.url, title: this.searchValue } })
             // this.$router.push({ name: 'Section', params: { data: res.data } })
           })
       }

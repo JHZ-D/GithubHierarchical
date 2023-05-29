@@ -21,15 +21,18 @@
         <n-grid :cols="1" :rows="2" :row-gap="16" class="mygrid">
           <n-grid-item span="1">
             <!-- <n-card title="Model–view–viewmodel" size="huge" class="mycard"> -->
-              <n-card :title="crepo?'NoneDay/CellReport':'Vue.js'" size="huge" class="mycard">
+              <!-- <n-card :title="crepo?'NoneDay/CellReport':'Vue.js'" size="huge" class="mycard"> -->
+                <n-card :title="title" size="huge" class="mycard">
                 <!-- <n-card title="Vue.js" size="huge" class="mycard">
                 Vue.js (commonly referred to as Vue; pronounced "view") is an open-source model–view–viewmodel front end JavaScript framework for building user interfaces and single-page applications. It was created by Evan You, and is maintained by him and the rest of the active core team members. -->
-                {{crepo?"CellReport 是一个netcore实现的、以复杂统计报表为核心目标的制作、运行工具。支持数据看板、大屏制作。你可以使用数据库、excel文件、api服务、已有报表等为数据源，通过内置的集合函数组织数据，以类excel界面设计最终呈现结果。":'Vue.js (commonly referred to as Vue; pronounced "view") is an open-source model–view–viewmodel front end JavaScript framework for building user interfaces and single-page applications. It was created by Evan You, and is maintained by him and the rest of the active core team members.'}}
+                <!-- {{crepo?"CellReport 是一个netcore实现的、以复杂统计报表为核心目标的制作、运行工具。支持数据看板、大屏制作。你可以使用数据库、excel文件、api服务、已有报表等为数据源，通过内置的集合函数组织数据，以类excel界面设计最终呈现结果。":'Vue.js (commonly referred to as Vue; pronounced "view") is an open-source model–view–viewmodel front end JavaScript framework for building user interfaces and single-page applications. It was created by Evan You, and is maintained by him and the rest of the active core team members.'}} -->
+                {{ description }}
                 <!-- CellReport 是一个netcore实现的、以复杂统计报表为核心目标的制作、运行工具。支持数据看板、大屏制作。你可以使用数据库、excel文件、api服务、已有报表等为数据源，通过内置的集合函数组织数据，以类excel界面设计最终呈现结果。 -->
               <!-- Model–view–viewmodel (MVVM) is an architectural pattern in computer software that facilitates the separation of the development of the graphical user interface (GUI; the view)—be it via a markup language or GUI code—from the development of the business logic or back-end logic (the model) such that the view is not dependent upon any specific model platform. -->
               <!-- jQuery is a JavaScript framework designed to simplify HTML DOM tree traversal and manipulation, as well as event handling, CSS animation, and Ajax. It is free, open-source software using the permissive MIT License. As of Aug 2022, jQuery is used by 77% of the 10 million most popular websites. Web analysis indicates that it is the most widely deployed JavaScript library by a large margin, having at least 3 to 4 times more usage than any other JavaScript library. -->
               <br><br><br>
-              {{crepo?"Github Repository":'Wikipedia'}} Link: <a href="https://github.com/NoneDay/CellReport" target="_blank">{{crepo?"https://github.com/NoneDay/CellReport":"https://en.wikipedia.org/wiki/Vue.js"}}</a>
+              <!-- {{crepo?"Github Repository":'Wikipedia'}} Link: <a href="https://github.com/NoneDay/CellReport" target="_blank">{{crepo?"https://github.com/NoneDay/CellReport":"https://en.wikipedia.org/wiki/Vue.js"}}</a> -->
+              {{ type }} Link: <a :href="url" target="_blank">{{ url }}</a>
               <!-- Wikipedia Link: <a href="https://en.wikipedia.org/wiki/Vue.js" target="_blank">https://en.wikipedia.org/wiki/Vue.js</a> -->
               <!-- Wikipedia Link: <a href="https://en.wikipedia.org/wiki/Model–view–viewmodel" target="_blank">https://en.wikipedia.org/wiki/Model–view–viewmodel</a> -->
               <!-- <br><br> -->
@@ -82,6 +85,7 @@ import { defineComponent, h } from 'vue'
 import { useNotification, NAvatar } from 'naive-ui'
 import { Help as HelpIcon } from '@vicons/ionicons5'
 import { mapState } from 'vuex'
+import axios from 'axios'
 import G6 from '@antv/g6'
 // import graphdata from '@/assets/graph.json'
 // import graphdata from '@/assets/wholegraph.json'
@@ -109,7 +113,11 @@ export default defineComponent({
       graph: null,
       repographdata: repographdata,
       crepo: false,
-      result: {} // 用来存储后端传回来的结果
+      result: {},
+      title: '',
+      description: '',
+      url: '',
+      type: ''
     }
   },
   components: {
@@ -124,7 +132,11 @@ export default defineComponent({
   // },
   mounted () {
     // 获取参数并赋值给result
-    this.result = { graph: JSON.parse(this.$route.query.graph), description: this.$route.query.description, url: this.$route.query.url }
+    this.result = { graph: JSON.parse(this.$route.query.graph), description: this.$route.query.description, url: this.$route.query.url, title: this.$route.query.title }
+    this.description = this.result.description
+    this.url = this.result.url
+    this.title = this.result.title
+    this.type = this.url.startsWith('https://en.wikipedia.org/wiki/') ? 'Wikipedia' : 'GitHub Topic'
     const notification = useNotification()
     if (!showed) {
       showed = true
@@ -184,18 +196,39 @@ export default defineComponent({
       this.graph.setItemState(nodeItem, 'click', true)
       // this.graph.layout.nodesep(10)
       // this.graph.layout.ranksep(10)
-      if (nodeItem._cfg.id === 'tp445') {
-        this.graph.changeData(this.jsonGraphData1)
-        this.graph.updateLayout({ type: 'compactBox', direction: 'TB', getVGap: function getVGap () { return 80 }, getHGap: function getHGap () { return 90 } })
-        // this.graph.updateLayout({ type: 'compactBox', direction: 'TB', getHeight: function getHeight () { return 32 }, getWidth: function getWidth () { return 16 }, getVGap: function getVGap () { return 80 }, getHGap: function getHGap () { return 60 } })
-        // this.graph.render()
-        return
+      let parentid = null
+      if (nodeItem._cfg.parent && !(this.type === 'GitHub Repository')) {
+        parentid = nodeItem._cfg.parent._cfg.id
       }
-      this.graph.data(this.repographdata)
-      // this.graph.layout.direction = 'BT'
-      this.graph.updateLayout({ type: 'compactBox', direction: 'BT', getHeight: function getHeight () { return 32 }, getWidth: function getWidth () { return 16 }, getVGap: function getVGap () { return 80 }, getHGap: function getHGap () { return 60 } })
-      this.graph.render()
-      this.crepo = true
+      axios.get('/getKnowp', { params: { text: nodeItem._cfg.id, parentid: parentid } })
+        .then(res => {
+          // res.data是后端传回来的结果，假设是一个数组
+          // 使用路由跳转到新页面，并把结果作为参数传递
+          this.graph.changeData(res.data.graph)
+          this.description = res.data.description
+          this.url = res.data.url
+          this.type = this.url.startsWith('https://en.wikipedia.org/wiki/') ? 'Wikipedia' : 'GitHub Topic'
+          this.type = nodeItem._cfg.id.startsWith('rp') ? 'GitHub Repository' : this.type
+          // this.$router.push({ name: 'Section', params: { data: res.data } })
+        })
+      if (nodeItem._cfg.id.startsWith('rp')) {
+        this.graph.updateLayout({ type: 'compactBox', direction: 'BT', getHeight: function getHeight () { return 32 }, getWidth: function getWidth () { return 16 }, getVGap: function getVGap () { return 80 }, getHGap: function getHGap () { return 60 } })
+      } else {
+        this.graph.updateLayout({ type: 'compactBox', direction: 'TB', getVGap: function getVGap () { return 80 }, getHGap: function getHGap () { return 90 } })
+      }
+      this.title = nodeItem._cfg.model.label
+      // if (nodeItem._cfg.id === 'tp445') {
+      //   this.graph.changeData(this.jsonGraphData1)
+      //   this.graph.updateLayout({ type: 'compactBox', direction: 'TB', getVGap: function getVGap () { return 80 }, getHGap: function getHGap () { return 90 } })
+      //   // this.graph.updateLayout({ type: 'compactBox', direction: 'TB', getHeight: function getHeight () { return 32 }, getWidth: function getWidth () { return 16 }, getVGap: function getVGap () { return 80 }, getHGap: function getHGap () { return 60 } })
+      //   // this.graph.render()
+      //   return
+      // }
+      // this.graph.data(this.repographdata)
+      // // this.graph.layout.direction = 'BT'
+      // this.graph.updateLayout({ type: 'compactBox', direction: 'BT', getHeight: function getHeight () { return 32 }, getWidth: function getWidth () { return 16 }, getVGap: function getVGap () { return 80 }, getHGap: function getHGap () { return 60 } })
+      // this.graph.render()
+      // this.crepo = true
     })
   },
   methods: {

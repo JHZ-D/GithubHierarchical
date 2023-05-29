@@ -13,7 +13,7 @@
 
 <script>
 import { defineComponent } from 'vue'
-import array from '@/assets/breadarr1.json'
+import array from '@/assets/breadarr.json'
 
 export default defineComponent({
   name: 'MultiSearchBread',
@@ -23,10 +23,20 @@ export default defineComponent({
       chooseArray: [],
       // el-select选中的数据
       objArr: [],
-      noNext: 0
+      noNext: 0,
+      chosenCate: ''
     }
   },
   methods: {
+    sendMsg () {
+      // 第一个参数是自定义的事件名，它携带第二个参数的内容
+      // 第二个参数是传递的数据
+      const sendData = {
+        chosenCate: this.chosenCate,
+        objArr: this.objArr
+      }
+      this.$emit('receive', sendData)
+    },
     chooseChildrenArr (val) {
       // 每次重新点击下拉框都要清楚，后续下拉框的值，重新为其赋值
       if (val.childrens.length > 0) { // 如果选中的元素，其有子元素，那么保留下一级的下拉框
@@ -45,7 +55,9 @@ export default defineComponent({
       const curArray = this.chooseArray[num - 1]
       const chosenArray = curArray.find(o => o.key === key)
       this.objArr[num - 1] = chosenArray.label
+      this.chosenCate = chosenArray.id
       this.chooseChildrenArr(chosenArray)
+      this.sendMsg()
     }
   },
   created () {
