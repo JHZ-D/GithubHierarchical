@@ -153,7 +153,6 @@ export default defineComponent({
   data () {
     return {
       searchValue: '',
-      heroine: 'HOMURA',
       current: 1,
       showModal: false,
       showContact: false,
@@ -161,17 +160,6 @@ export default defineComponent({
       knowpdict: knowpdict,
       chosenCate: '',
       objArr: [],
-      // showSource: false,
-      langOptions: [
-        {
-          label: '中文',
-          key: 'zh'
-        },
-        {
-          label: 'English',
-          key: 'en'
-        }
-      ],
       searchTypeOptions: [
         {
           label: '搜索知识点',
@@ -230,14 +218,6 @@ export default defineComponent({
     },
     handleSearchSelect (key) {
       this.set_searchtype(key)
-    },
-    projectNameMouseEnter () {
-      this.heroine = this.en ? 'HIKARI' : '光'
-      this.$refs.name.style.color = '#FCA04C'
-    },
-    projectNameMouseLeave () {
-      this.heroine = this.en ? 'HOMURA' : '焰'
-      this.$refs.name.style.color = '#F1394B'
     },
     handleButtonClick () {
       // if (this.current === 3) {
