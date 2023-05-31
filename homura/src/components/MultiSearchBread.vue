@@ -17,6 +17,13 @@ import array from '@/assets/breadarr.json'
 
 export default defineComponent({
   name: 'MultiSearchBread',
+  props: {
+    info: {
+      type: Array,
+      required: false,
+      default: () => []
+    }
+  },
   data () {
     return {
       array: array,
@@ -58,6 +65,22 @@ export default defineComponent({
       this.chosenCate = chosenArray.id
       this.chooseChildrenArr(chosenArray)
       this.sendMsg()
+    }
+  },
+  mounted () {
+    this.objArr = this.info
+    for (let i = 0; i < this.objArr.length; i++) {
+      const curArray = this.chooseArray[i]
+      const chosenArray = curArray.find(o => o.label === this.objArr[i])
+      const val = chosenArray
+      if (val.childrens.length > 0) { // 如果选中的元素，其有子元素，那么保留下一级的下拉框
+        // this.obj = {}
+        this.chooseArray[val.level + 1] = val.childrens
+        this.noNext = 0
+      } else { // 如果选中的元素，没有子元素，那么只保留切换的下拉框，清楚其以下的所有下拉框
+        this.chooseArray.splice(val.level + 1)
+        this.noNext = 1
+      }
     }
   },
   created () {

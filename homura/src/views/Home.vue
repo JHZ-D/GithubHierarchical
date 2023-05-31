@@ -201,9 +201,8 @@ export default defineComponent({
           .then(res => {
             // res.data是后端传回来的结果，假设是一个数组
             // 使用路由跳转到新页面，并把结果作为参数传递
-            this.$router.push({ path: '/search', query: { data: res.data } })
+            this.$router.push({ path: '/search', query: { data: JSON.stringify(res.data.repos), objArr: this.objArr, searchText: this.searchValue } })
           })
-        this.$router.push('/search')
       } else {
         if (this.searchValue === '') {
           return

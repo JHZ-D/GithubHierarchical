@@ -93,6 +93,7 @@ import G6 from '@antv/g6'
 import graphdata from '@/assets/vuerepo.json'
 import graphdata1 from '@/assets/vuerepo2.json'
 import repographdata from '@/assets/repodemotree1.json'
+import SDdata from '@/assets/SDdata.json'
 // import Legend from '@/components/Legend.vue'
 
 // const loadLimit = 20
@@ -132,7 +133,12 @@ export default defineComponent({
   // },
   mounted () {
     // 获取参数并赋值给result
-    this.result = { graph: JSON.parse(this.$route.query.graph), description: this.$route.query.description, url: this.$route.query.url, title: this.$route.query.title }
+    if (this.$route.query.graph) {
+      this.result = { graph: JSON.parse(this.$route.query.graph), description: this.$route.query.description, url: this.$route.query.url, title: this.$route.query.title }
+    } else {
+      this.result = SDdata
+      this.result.title = 'Software development'
+    }
     this.description = this.result.description
     this.url = this.result.url
     this.title = this.result.title
@@ -212,9 +218,9 @@ export default defineComponent({
           // this.$router.push({ name: 'Section', params: { data: res.data } })
         })
       if (nodeItem._cfg.id.startsWith('rp')) {
-        this.graph.updateLayout({ type: 'compactBox', direction: 'BT', getHeight: function getHeight () { return 32 }, getWidth: function getWidth () { return 16 }, getVGap: function getVGap () { return 80 }, getHGap: function getHGap () { return 60 } })
+        this.graph.updateLayout({ type: 'compactBox', direction: 'BT', getHeight: function getHeight () { return 32 }, getVGap: function getVGap () { return 80 } })
       } else {
-        this.graph.updateLayout({ type: 'compactBox', direction: 'TB', getVGap: function getVGap () { return 80 }, getHGap: function getHGap () { return 90 } })
+        this.graph.updateLayout({ type: 'compactBox', direction: 'TB', getVGap: function getVGap () { return 80 } })
       }
       this.title = nodeItem._cfg.model.label
       // if (nodeItem._cfg.id === 'tp445') {
@@ -304,9 +310,9 @@ export default defineComponent({
           getId: function getId (d) {
             return d.id
           },
-          getHeight: function getHeight () {
-            return 32
-          },
+          // getHeight: function getHeight () {
+          //   return 32
+          // },
           getWidth: function getWidth () {
             return 16
           },
@@ -314,7 +320,7 @@ export default defineComponent({
             return 80
           },
           getHGap: function getHGap () {
-            return 60
+            return 40
           }
         }
         // defaultEdge: {
@@ -410,7 +416,7 @@ export default defineComponent({
             break
           }
         }
-        if (node.id === 'pg1000') {
+        if (node.cur === 1) {
           node.style.stroke = '#ffd400'
           node.style.lineWidth = 3
         }

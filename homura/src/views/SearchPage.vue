@@ -18,11 +18,10 @@
         </n-layout>
           <!-- <n-layout-content class="headerasearch" style="background-color: rgba(144, 215, 236,0.7);"> -->
             <div id="search-container">
-              <MultiSearchBread ></MultiSearchBread>
+              <MultiSearchBread @receive="getMsg" :info="objArr"></MultiSearchBread>
               <div id="search-space">
                 <n-auto-complete
                     id="search-input"
-                    :options="searchOptions"
                     v-model:value="searchValue"
                     size="large"
                     placeholder="搜索仓库"
@@ -47,7 +46,8 @@
           </n-grid>
         </n-card>
       </div> -->
-  <n-data-table style="height: 500px; width: 1200px; margin: 50px auto; --td-padding: 10px; --th-padding: 11px" :columns="columns" :data="repodata" :pagination="pagination" flex-height />
+  <n-data-table style="height: 500px; width: 1200px; margin: 50px auto; --td-padding: 10px; --th-padding: 11px" :columns="columns" :data="repodata" :pagination="pagination" flex-height><n-empty description="找不到符合条件的仓库！">
+  </n-empty></n-data-table>
     </n-space>
   </div>
   <n-modal v-model:show="showModal">
@@ -63,8 +63,9 @@
 import { h, defineComponent, reactive } from 'vue'
 import { Search, TrashOutline, Help as HelpIcon } from '@vicons/ionicons5'
 import { mapState, mapMutations } from 'vuex'
+import axios from 'axios'
 import MultiSearchBread from '../components/MultiSearchBread.vue'
-import repodata from '@/assets/midrepos.json'
+// import repodata from '@/assets/midrepos.json'
 
 // const tableData = Array.from(repodata).map((item, index) => ({
 //   key: index,
@@ -93,21 +94,39 @@ export default defineComponent({
     MultiSearchBread,
     HelpIcon
   },
-  created () {
-  },
   data () {
     return {
       searchValue: '',
       messageBox: undefined,
       literal_items: [],
       showModal: false,
-      repodata: repodata,
-      result: []
+      repodata: [],
+      result: [],
+      objArr: [],
+      searchText: '',
+      chosenCate: '0'
     }
+  },
+  created () {
+    this.$watch('chosenCate', (newValue, oldValue) => {
+      // 执行相应的函数
+      if (this.searchValue === '' && this.chosenCate === '0') {
+        return
+      }
+      axios.get('/repo', { params: { text: this.searchValue, cate: newValue } })
+        .then(res => {
+          this.repodata = res.data.repos
+        })
+    })
+    this.objArr = this.$route.query.objArr
   },
   mounted () {
     // 获取参数并赋值给result
-    this.result = this.$route.query.data
+    if (this.$route.query.data === undefined) {
+      return
+    }
+    this.repodata = JSON.parse(this.$route.query.data)
+    this.searchValue = this.$route.query.searchText
   },
   setup () {
     const paginationReactive = reactive({
@@ -129,17 +148,25 @@ export default defineComponent({
     }
   },
   methods: {
+    getMsg (data) {
+      this.chosenCate = data.chosenCate
+      this.objArr = data.objArr
+    },
     async onSearchClick () {
       if (this.searchValue === '') {
         return
       }
-      const paramObj = {
-        query: this.searchValue
-      }
-      const literalRes = await this.$http.post(this.loadUrl, paramObj)
-      const literalData = literalRes.data.data
-      this.literal_items = literalData
-      this.messageBox.success('thread info list loaded', { duration: 500 })
+      axios.get('/repo', { params: { text: this.searchValue, cate: this.chosenCate } })
+        .then(res => {
+          this.repodata = res.data.repos
+        })
+      // const paramObj = {
+      //   query: this.searchValue
+      // }
+      // const literalRes = await this.$http.post(this.loadUrl, paramObj)
+      // const literalData = literalRes.data.data
+      // this.literal_items = literalData
+      // this.messageBox.success('thread info list loaded', { duration: 500 })
     },
     onViewClick (item) {
       this.set_id(item.id)
@@ -156,15 +183,6 @@ export default defineComponent({
     })
   },
   computed: {
-    searchOptions () {
-      return ['没做完', '是真的', '别想了'].map((suffix) => {
-        const prefix = this.searchValue.split('@')[0]
-        return {
-          label: prefix + suffix,
-          value: prefix + suffix
-        }
-      })
-    },
     loadUrl () {
       return '/search/' + this.docName
     },
